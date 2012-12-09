@@ -24,6 +24,8 @@ PATCHES=( "${FILESDIR}/kscd-3.5.6-alsa-tests.patch"
 
 src_compile() {
 	DO_NOT_COMPILE=libkcddb kde-meta_src_compile myconf configure
+	sed -e 's/^LIBS =.*$/\0 \/lib64\/libpthread.so.0/' \
+		-i kscd/Makefile || die
 	cd "$S"/libkcddb && emake configbase.h
 	cd "$S"/libkcddb && emake cdinfodialogbase.h
 	DO_NOT_COMPILE=libkcddb kde-meta_src_compile make
