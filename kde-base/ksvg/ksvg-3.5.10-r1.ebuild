@@ -26,6 +26,14 @@ src_unpack() {
 
 	if has_version ">=dev-libs/fribidi-0.19.1"; then
 		epatch "${FILESDIR}/${PN}-fribidi.patch"
+		which fribidi-config 2>/dev/null >/dev/null || {
+			einfo "Rigging up fake fribidi-config"
+			mkdir "${S}"/fake-fribidi-config
+			cp "${FILESDIR}"/fake-fribidi-config.sh \
+				"${S}"/fake-fribidi-config/fribidi-config
+			chmod a+x "${S}"/fake-fribidi-config/fribidi-config
+			export PATH="${S}/fake-fribidi-config:${PATH}"
+		}
 		append-ldflags $(no-as-needed)
 	fi
 }
