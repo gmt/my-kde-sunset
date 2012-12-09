@@ -28,7 +28,8 @@ KMEXTRACTONLY="libkonq
 KMCOMPILEONLY="kdmlib/"
 
 PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-p13-r886334.patch"
-	"${FILESDIR}/${P}-konsole_ssh_bookmark.patch" )
+	"${FILESDIR}/${P}-konsole_ssh_bookmark.patch"
+	"${FILESDIR}/${P}-use-this.patch" )
 
 src_compile() {
 	myconf="$myconf $(use_with xcomposite composite)"
