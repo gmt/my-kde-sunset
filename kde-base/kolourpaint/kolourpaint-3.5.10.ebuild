@@ -10,3 +10,8 @@ DESCRIPTION="Paint Program for KDE"
 KEYWORDS="alpha amd64 hppa ia64 ~mips ppc ppc64 sparc x86 ~x86-fbsd"
 IUSE=""
 LICENSE="BSD"
+
+src_unpack() {
+	kde-meta_src_unpack
+	epatch "${FILESDIR}"/${P}-link-with-kdefx.patch
+}
