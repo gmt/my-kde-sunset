@@ -1,0 +1,12 @@
+--- knetworkconf-3.5.10.orig/knetworkconf/knetworkconf/knetworkconf.cpp	2006-07-22 01:08:14.000000000 -0700
++++ knetworkconf-3.5.10/knetworkconf/knetworkconf/knetworkconf.cpp	2012-12-09 05:12:16.334679201 -0800
+@@ -29,7 +29,8 @@ KNetworkConf::KNetworkConf(QWidget *pare
+   klvProfilesList->setAllColumnsShowFocus(true);
+   klvProfilesList->setRenameable(0,true);
+   klvProfilesList->setRenameable(1,true);
+-  QToolTip::remove( &(QListView)klvProfilesList );
++  QListView *tehklvProfilesList = (QListView*) &klvProfilesList;
++  QToolTip::remove( tehklvProfilesList );
+   tooltip = new KProfilesListViewToolTip(klvProfilesList);
+
+   //Connect signals emmitted by the backend to know when data is ready to be painted.

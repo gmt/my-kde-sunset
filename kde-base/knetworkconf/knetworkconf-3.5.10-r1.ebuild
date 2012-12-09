@@ -12,4 +12,5 @@ KEYWORDS="~alpha ~amd64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="kdehiddenvisibility"
 DEPEND=""
 
-PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-r884099.patch" )
+PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-r884099.patch"
+	"${FILESDIR}/${KMNAME}_${PN}-taking-address-of-temporary.patch" )
