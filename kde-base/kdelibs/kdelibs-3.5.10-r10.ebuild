@@ -201,6 +201,8 @@ src_compile() {
 
 	replace-flags "-O3" "-O2" # see bug #148180
 
+	use cups && append-cppflags "-D_IPP_PRIVATE_STRUCTURES=1"
+
 	kde_src_compile
 
 	if use doc; then
