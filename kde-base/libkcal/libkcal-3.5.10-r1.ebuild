@@ -20,7 +20,8 @@ KMEXTRACTONLY="libkdepim/email.h
 	libkmime/kmime_util.h"
 KMCOMPILEONLY="libemailfunctions/"
 
-PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-r860376.patch" )
+PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-r860376.patch"
+		  "${FILESDIR}/${P}-use-this.patch" )
 
 src_unpack() {
 	kde-meta_src_unpack

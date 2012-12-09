@@ -1,0 +1,11 @@
+--- libkcal-3.5.10.orig/libkcal/listbase.h	2008-08-19 11:16:00.000000000 -0700
++++ libkcal-3.5.10/libkcal/listbase.h	2012-12-09 03:17:58.296051665 -0800
+@@ -67,7 +67,7 @@
+
+     bool removeRef( T *t )
+     {
+-      QValueListIterator<T *> it = find( t );
++      QValueListIterator<T *> it = this->find( t );
+       if ( it == QValueList<T*>::end() ) {
+         return false;
+       } else {
