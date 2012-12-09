@@ -14,7 +14,7 @@ RDEPEND="!x11-misc/superkaramba"
 
 PATCHES=( "${FILESDIR}/${PN}-3.5.2-multilib-python.diff"
 	"${FILESDIR}/${PN}-3.5.7-network_sensor.patch"
-	"${FILESDIR}/${PN}-python-2.6.patch" )
+	"${FILESDIR}/${PN}-python-2.7.patch" )
 
 pkg_setup() {
 	if ! built_with_use dev-lang/python threads ; then
