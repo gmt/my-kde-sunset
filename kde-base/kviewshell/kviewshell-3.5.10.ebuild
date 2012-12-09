@@ -12,3 +12,8 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="|| ( >=kde-base/kdebase-kioslaves-${PV}:${SLOT} >=kde-base/kdebase-${PV}:${SLOT} )"
+
+src_unpack() {
+	kde-meta_src_unpack
+	epatch "${FILESDIR}"/${P}-gcc47.patch
+}

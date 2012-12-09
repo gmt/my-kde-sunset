@@ -1,0 +1,293 @@
+diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/documentWidget.cpp kviewshell-3.5.10/kviewshell/documentWidget.cpp
+--- kviewshell-3.5.10.orig/kviewshell/documentWidget.cpp	2005-11-08 14:25:45.000000000 -0800
++++ kviewshell-3.5.10/kviewshell/documentWidget.cpp	2012-12-09 06:55:47.598962271 -0800
+@@ -287,7 +287,8 @@ void DocumentWidget::paintEvent(QPaintEv
+     if (KVSPrefs::changeColors() && KVSPrefs::renderMode() != KVSPrefs::EnumRenderMode::Paper)
+     {
+       // Paint widget contents with accessibility changes.
+-      bitBlt ( this, destRect.topLeft(), &pageData->accessiblePixmap(), pixmapRect, CopyROP);
++      QPixmap pdap = pageData->accessiblePixmap();
++      bitBlt ( this, destRect.topLeft(), &pdap, pixmapRect, CopyROP);
+     }
+     else
+     {
+diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GContainer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h
+--- kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GContainer.h	2005-09-10 01:19:20.000000000 -0700
++++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h	2012-12-09 07:50:31.569679411 -0800
+@@ -66,6 +66,7 @@
+
+ #include "GException.h"
+ #include "GSmartPointer.h"
++#include "GPixmap.h"
+ #include <string.h>
+
+ #ifdef HAVE_NAMESPACES
+@@ -887,21 +888,21 @@ public:
+   /** Inserts an element after the last element of the list.
+       The new element is initialized with a copy of argument #elt#. */
+   void append(const TYPE &elt)
+-    { GListImpl<TI>::append(newnode((const TI&)elt)); }
++    { GListImpl<TI>::append(this->newnode((const TI&)elt)); }
+   /** Inserts an element before the first element of the list.
+       The new element is initialized with a copy of argument #elt#. */
+   void prepend(const TYPE &elt)
+-    { GListImpl<TI>::prepend(newnode((const TI&)elt)); }
++    { GListImpl<TI>::prepend(this->newnode((const TI&)elt)); }
+   /** Inserts a new element after the list element at position #pos#.  When
+       position #pos# is null the element is inserted at the beginning of the
+       list.  The new element is initialized with a copy of #elt#. */
+   void insert_after(GPosition pos, const TYPE &elt)
+-    { GListImpl<TI>::insert_after(pos, newnode((const TI&)elt)); }
++    { GListImpl<TI>::insert_after(pos, this->newnode((const TI&)elt)); }
+   /** Inserts a new element before the list element at position #pos#. When
+       position #pos# is null the element is inserted at the end of the
+       list. The new element is initialized with a copy of #elt#. */
+   void insert_before(GPosition pos, const TYPE &elt)
+-    { GListImpl<TI>::insert_before(pos, newnode((const TI&)elt)); }
++    { GListImpl<TI>::insert_before(pos, this->newnode((const TI&)elt)); }
+   /** Inserts an element of another list into this list.  This function
+       removes the element at position #frompos# in list #frompos#, inserts it
+       in the current list before the element at position #pos#, and advances
+@@ -1025,6 +1026,94 @@ public:
+   void empty();
+ };
+
++// ------------------------------------------------------------
++// HASH FUNCTIONS
++// ------------------------------------------------------------
++
++
++/** @name Hash functions
++    These functions let you use template class \Ref{GMap} with the
++    corresponding elementary types. The returned hash code may be reduced to
++    an arbitrary range by computing its remainder modulo the upper bound of
++    the range.
++    @memo Hash functions for elementary types. */
++//@{
++
++/** Hashing function (unsigned int). */
++static inline unsigned int
++hash(const unsigned int & x)
++{
++  return x;
++}
++
++/** Hashing function (int). */
++static inline unsigned int
++hash(const int & x)
++{
++  return (unsigned int)x;
++}
++
++/** Hashing function (long). */
++static inline unsigned int
++hash(const long & x)
++{
++  return (unsigned int)x;
++}
++
++/** Hashing function (unsigned long). */
++static inline unsigned int
++hash(const unsigned long & x)
++{
++  return (unsigned int)x;
++}
++
++/** Hashing function (void *). */
++static inline unsigned int
++hash(void * const & x)
++{
++  return (unsigned long) x;
++}
++
++/** Hashing function (const void *). */
++static inline unsigned int
++hash(const void * const & x)
++{
++  return (unsigned long) x;
++}
++
++/** Hashing function (float). */
++static inline unsigned int
++hash(const float & x)
++{
++  // optimizer will get rid of unnecessary code
++  unsigned int *addr = (unsigned int*)&x;
++  if (sizeof(float)<2*sizeof(unsigned int))
++    return addr[0];
++  else
++    return addr[0]^addr[1];
++}
++
++/** Hashing function (double). */
++static inline unsigned int
++hash(const double & x)
++{
++  // optimizer will get rid of unnecessary code
++  unsigned int *addr = (unsigned int*)&x;
++  if (sizeof(double)<2*sizeof(unsigned int))
++    return addr[0];
++  else if (sizeof(double)<4*sizeof(unsigned int))
++    return addr[0]^addr[1];
++  else
++    return addr[0]^addr[1]^addr[2]^addr[3];
++}
++
++
++//@}
++//@}
++//@}
++
++// ------------ THE END
++
+ template <class K>
+ class GSetImpl : public GSetBase
+ {
+@@ -1057,7 +1146,7 @@ GSetImpl<K>::GSetImpl(const Traits &trai
+ template<class K> GCONT HNode *
+ GSetImpl<K>::get(const K &key) const
+ {
+-  unsigned int hashcode = hash(key);
++  unsigned int hashcode = (const unsigned int &)hash(key);
+   for (SNode *s=(SNode*)hashnode(hashcode); s; s=(SNode*)(s->hprev))
+     if (s->hashcode == hashcode && s->key == key) return s;
+   return 0;
+@@ -1122,7 +1211,7 @@ GMapImpl<K,TI>::GMapImpl(const GCONT Tra
+ template<class K, class TI> GCONT HNode *
+ GMapImpl<K,TI>::get_or_create(const K &key)
+ {
+-  GCONT HNode *m = get(key);
++  GCONT HNode *m = this->get(key);
+   if (m) return m;
+   MNode *n = (MNode*) operator new (sizeof(MNode));
+ #if GCONTAINER_ZERO_FILL
+@@ -1131,7 +1220,7 @@ GMapImpl<K,TI>::get_or_create(const K &k
+   new ((void*)&(n->key)) K  (key);
+   new ((void*)&(n->val)) TI ();
+   n->hashcode = hash((const K&)(n->key));
+-  installnode(n);
++  this->installnode(n);
+   return n;
+ }
+
+@@ -1197,13 +1286,13 @@ public:
+       contains key #key#. This variant of #operator[]# is necessary when
+       dealing with a #const GMAP<KTYPE,VTYPE>#. */
+   const VTYPE& operator[](const KTYPE &key) const
+-    { return (const VTYPE&)(((const typename GMapImpl<KTYPE,TI>::MNode*)(get_or_throw(key)))->val); }
++    { return (const VTYPE&)(((const typename GMapImpl<KTYPE,TI>::MNode*)(this->get_or_throw(key)))->val); }
+   /** Returns a reference to the value of the map entry for key #key#.  This
+       reference can be used for both reading (as "#a[n]#") and modifying (as
+       "#a[n]=v#"). If there is no entry for key #key#, a new entry is created
+       for that key with the null constructor #VTYPE::VTYPE()#. */
+   VTYPE& operator[](const KTYPE &key)
+-    { return (VTYPE&)(((typename GMapImpl<KTYPE,TI>::MNode*)(get_or_create(key)))->val); }
++    { return (VTYPE&)(((typename GMapImpl<KTYPE,TI>::MNode*)(this->get_or_create(key)))->val); }
+   /** Destroys the map entry for position #pos#.
+       Nothing is done if position #pos# is not a valid position. */
+   void del(GPosition &pos)
+@@ -1266,93 +1355,6 @@ public:
+ };
+
+
+-// ------------------------------------------------------------
+-// HASH FUNCTIONS
+-// ------------------------------------------------------------
+-
+-
+-/** @name Hash functions
+-    These functions let you use template class \Ref{GMap} with the
+-    corresponding elementary types. The returned hash code may be reduced to
+-    an arbitrary range by computing its remainder modulo the upper bound of
+-    the range.
+-    @memo Hash functions for elementary types. */
+-//@{
+-
+-/** Hashing function (unsigned int). */
+-static inline unsigned int
+-hash(const unsigned int & x)
+-{
+-  return x;
+-}
+-
+-/** Hashing function (int). */
+-static inline unsigned int
+-hash(const int & x)
+-{
+-  return (unsigned int)x;
+-}
+-
+-/** Hashing function (long). */
+-static inline unsigned int
+-hash(const long & x)
+-{
+-  return (unsigned int)x;
+-}
+-
+-/** Hashing function (unsigned long). */
+-static inline unsigned int
+-hash(const unsigned long & x)
+-{
+-  return (unsigned int)x;
+-}
+-
+-/** Hashing function (void *). */
+-static inline unsigned int
+-hash(void * const & x)
+-{
+-  return (unsigned long) x;
+-}
+-
+-/** Hashing function (const void *). */
+-static inline unsigned int
+-hash(const void * const & x)
+-{
+-  return (unsigned long) x;
+-}
+-
+-/** Hashing function (float). */
+-static inline unsigned int
+-hash(const float & x)
+-{
+-  // optimizer will get rid of unnecessary code
+-  unsigned int *addr = (unsigned int*)&x;
+-  if (sizeof(float)<2*sizeof(unsigned int))
+-    return addr[0];
+-  else
+-    return addr[0]^addr[1];
+-}
+-
+-/** Hashing function (double). */
+-static inline unsigned int
+-hash(const double & x)
+-{
+-  // optimizer will get rid of unnecessary code
+-  unsigned int *addr = (unsigned int*)&x;
+-  if (sizeof(double)<2*sizeof(unsigned int))
+-    return addr[0];
+-  else if (sizeof(double)<4*sizeof(unsigned int))
+-    return addr[0]^addr[1];
+-  else
+-    return addr[0]^addr[1]^addr[2]^addr[3];
+-}
+-
+-
+-//@}
+-//@}
+-//@}
+-
+-// ------------ THE END
+
+
+ #ifdef HAVE_NAMESPACES
+diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h
+--- kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h	2005-09-10 01:19:20.000000000 -0700
++++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h	2012-12-09 06:59:23.115740992 -0800
+@@ -106,6 +106,7 @@ namespace DJVU {
+ #endif
+ #endif
+
++#include <string.h>
+
+
+ /* What is this innovation ?
