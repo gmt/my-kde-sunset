@@ -17,7 +17,8 @@ RDEPEND="${RDEPEND}
 KMCOMPILEONLY=lib
 
 PATCHES=( "${FILESDIR}/${KMNAME}_${PN}-r928380.patch"
-	"${FILESDIR}/${KMNAME}_lib-r928380.patch" )
+	"${FILESDIR}/${KMNAME}_lib-r928380.patch"
+	"${FILESDIR}/temporary-as-lvalue.patch" )
 
 # TODO: check why this wasn't needed back in the monolithic ebuild
 src_compile () {

@@ -1,0 +1,40 @@
+--- a/quanta/parsers/tag.h
++++ b/quanta/parsers/tag.h
+@@ -88,6 +88,9 @@
+   void addAttribute(TagAttr attr) {attrs.append(attr);}
+   /** Get the attribute number index */
+   TagAttr getAttribute(uint index) const {return attrs[index];}
++  /* /!\ KLUDGE WARNING /!\ */
++  /** Get the attribute number index: returns a pointer */
++  TagAttr* getAttribute_gcc46(uint index) {return (TagAttr*) &attrs[index];}
+   /** Remove the attribute number index */
+   void deleteAttribute(uint index) {attrs.remove(attrs.at(index));}
+   /** Insert a new Attribute, even if it already exists. Prefer using editAttribute.
+--- a/quanta/parts/kafka/kafkacommon.cpp
++++ b/quanta/parts/kafka/kafkacommon.cpp
+@@ -740,17 +740,18 @@
+                                       beginCol, lastLine + lineMovement, lastCol);
+         for(j = 0; j < node->tag->attrCount(); ++j)
+         {
+-            if(node->tag->getAttribute(j).nameLine == SNbeginLine)
++	    TagAttr* ta = node->tag->getAttribute_gcc46(j);
++            if(ta->nameLine == SNbeginLine)
+             {
+-                node->tag->getAttribute(j).nameLine += lineMovement;
+-                node->tag->getAttribute(j).nameCol += colMovement;
+-                node->tag->getAttribute(j).valueLine += lineMovement;
+-                node->tag->getAttribute(j).valueCol += colMovement;
++                ta->nameLine += lineMovement;
++                ta->nameCol += colMovement;
++                ta->valueLine += lineMovement;
++                ta->valueCol += colMovement;
+             }
+             else
+             {
+-                node->tag->getAttribute(j).nameLine += lineMovement;
+-                node->tag->getAttribute(j).valueLine += lineMovement;
++                ta->nameLine += lineMovement;
++                ta->valueLine += lineMovement;
+             }
+         }
+         node = getNextNode(node, b);
