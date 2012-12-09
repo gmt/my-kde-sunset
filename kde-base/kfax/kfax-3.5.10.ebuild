@@ -16,3 +16,8 @@ KMEXTRA="kfaxview"
 KMCOPYLIB="libkmultipage kviewshell"
 KMEXTRACTONLY="kviewshell/"
 KMCOMPILEONLY="kviewshell"
+
+src_unpack() {
+	kde-meta_src_unpack
+	epatch "${FILESDIR}"/${P}-gcc47.patch
+}

@@ -19,6 +19,11 @@ RDEPEND="${DEPEND}
 KMCOMPILEONLY="kviewshell/"
 SITEFILE=50${PN}-gentoo.el
 
+src_unpack() {
+	kde-meta_src_unpack
+	epatch "${FILESDIR}"/${P}-gcc47.patch
+}
+
 src_compile() {
 	kde-meta_src_compile
 
