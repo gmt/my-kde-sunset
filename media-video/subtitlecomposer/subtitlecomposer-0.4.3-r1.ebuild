@@ -2,9 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-ARTS_REQUIRED="never"
-
 EAPI=3
+ARTS_REQUIRED="never"
 
 inherit kde kde-functions
 
