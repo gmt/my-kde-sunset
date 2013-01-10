@@ -3,72 +3,72 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +++ qt-x11-free-3.3.8/ChangeLog.immodule	2007-03-20 23:18:42.000000000 +0900
 @@ -0,0 +1,2027 @@
 +2004-09-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* changes.immodule
 +	  - Describe a bugfix
-+
++	
 +2004-09-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/inputmethod/qinputcontextinterface_p.h
 +	  - Update UUID of QInputContextFactory in accordance with API change
 +	    of QInputContext to avoid loading old invalid plugins
-+
++	
 +2004-09-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* README.immodule
 +	  - Add 'About this release' section
 +	  - Update version information
 +	  - Update to follow the change of configure options
 +	  - Modify some English expressions
-+
++	
 +	* changes.immodule
 +	  - Move release information to README.immodule
 +	  - Add differences from previous release
 +	  - Add description about incremental change indication
-+
++	
 +	* ChangeLog.immodule
 +	  - Update
-+
++	
 +2004-09-09  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qapplication.cpp
 +	  - (removePostedEvents):
 +	    * Fix infinite loop condition
 +	    * delete receiver->postedEvents if the list has been empty
-+
++	
 +2004-09-09  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit backports some code fragments from Qt4 branch to make
 +	  input method plugins source compatible with Qt4.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (QInputContext): Add 'parent' arg
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - Exclude qptrlist.h when compile with Qt4
 +	  - (struct QInputContextMenu): Exclude member variables when compile
 +	    with Qt4
 +	  - (QInputContext): Add 'parent' arg
 +	  - (addActionsTo): New function for Qt4
-+
++	
 +2004-09-08  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit renames input method module from 'input' to 'inputmehod'
 +	  because the name 'input' is too generic to indicate its function
-+
++	
 +	* configure
 +	  - Replace configuration options '-im' and '-im-ext' with
 +	    '-inputmethod' and '-inputmethod-ext' to be consistent with the
 +	    name of input method module subdirectory 'inputmethod'
 +	  - Rename the module name 'input' with 'inputmethod'
-+
++	
 +	* src/qt.pro
 +	  - Rename the module name 'input' with 'inputmethod'
 +	  - Rename some variable names inaccordance with the renaming of the
 +	    module
 +	  - Replace 'qt_input.pri' with 'qt_inputmethod.pri' in accordance
 +	    with the renaming of the file
-+
++	
 +	* src/inputmethod/qt_input.pri
 +	  - Rename to qt_inputmethod.pri
 +	* src/inputmethod/qt_input.pri
@@ -76,13 +76,13 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Replace module names
 +	  - Rename some variable names inaccordance with the renaming of the
 +	    module
-+
++	
 +2004-09-08  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* Rename input module subdirectory from "input" to "inputmethod"
-+
++	
 +2004-09-08  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit contains following issues
 +	  - An API change. Return type of QInputContext::identifierName and
 +	    QInputContext::language has been changed from QCString which is
@@ -95,7 +95,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    further information.
 +	    http://freedesktop.org/pipermail/immodule-qt/2004-September/000447.html
 +	    http://freedesktop.org/pipermail/immodule-qt/2004-September/000497.html
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (identifierName, language): Change return type from QCString to QString
 +	  - (addMenusTo): Make Qt3 specific
@@ -104,11 +104,11 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Change return type from QCString to QString
 +	    * Modify the function description comment
 +	  - (language): Change return type from QCString to QString
-+
++	
 +	* src/kernel/qwidget.cpp
 +	  - (clearFocus): Enclose immodule specific code by #if
 +	    defined(Q_WS_X11)
-+
++	
 +	* src/kernel/qapplication.h
 +	  - Add 'class QIMEvent' declaration
 +	  - (removePostedEvents): New overriding function
@@ -128,16 +128,16 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    accept event_type. This function is required by postIMEvent()
 +	  - (setActiveWindow): Enclose immodule specific code by #if
 +	    defined(Q_WS_X11)
-+
++	
 +	* src/input/qinputcontextinterface_p.h
 +	  - Modify a coding style to follow Trolltech's one for Qt3
-+
++	
 +	* src/input/qinputcontextplugin.h
 +	  - Fix typos in comment
 +	* src/input/qinputcontextplugin.cpp
 +	  - (keys, QInputContextPlugin, ~QInputContextPlugin): Modify the
 +	    function description comment
-+
++	
 +	* src/input/qinputcontextfactory.h
 +	  - Remove #include "qinputcontext.h" to reduce compilation dependency
 +	  - Add 'class QWidget' declaration
@@ -148,32 +148,32 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Remove unnecessary #include "qpopupmenu.h"
 +	  - Remove inappropriate #ifndef QT_NO_STRINGLIST. QStringList is now
 +	    required feature for immodule. See also changes of qfeatures.h
-+
++	
 +	* src/tools/qfeatures.h
 +	  - Define QT_NO_IM if QT_NO_STRINGLIST is defined
 +	  - Define QT_NO_IM_EXTENSIONS if QT_NO_IM or QT_NO_STRINGLIST is
 +	    defined
-+
++	
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - Rename conditional configuration symbol from "im" to "inputmethod"
 +	    inaccordance with chanege of configure script
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.h
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontext.h
 +	  - (identifierName, language): Change return type from QCString to
 +	    QString
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp
 +	  - (identifierName, language): Change return type from QCString to
 +	    QString
 +	  - (createImSelPopup): Replace QString::find() which is deprecated in
 +	    Qt4 with QString::startsWith()
-+
++	
 +	* plugins/src/inputmethods/imsw-none/qnoneinputcontextplugin.cpp
 +	  - (create): Replace QString::find() which is deprecated in Qt4 with
 +	    QString::startsWith()
-+
++	
 +	* plugins/src/inputmethods/xim/qximinputcontext.h
 +	  - (language): Change return type from QCString to QString
 +	  - (identifierName):
@@ -186,66 +186,66 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Move implementation from qximinputcontext.h
 +	  - (language): Replace QString::find() which is deprecated in Qt4 with
 +	    QString::startsWith()
-+
++	
 +2004-08-19  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (keys): Modify the function description comment
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create_manager): Fix plugin directory from "/input" to "/inputmethods"
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (KeyTbl): Add translations for Japanese and Korean alias keys
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit disables default IM configuration feature using qtrc and
 +	  qtconfig in BC mode. See following discussion for further
 +	  information.
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000416.html
-+
++	
 +	* src/kernel/qapplication_x11.cpp
-+	  - (x11_apply_settings):
++	  - (x11_apply_settings): 
 +	    * Move immodule handling into #ifndef QT_NO_IM rather than QT_NO_XIM
 +	    * Move qtrc handling into #ifndef QT_NO_IM_EXTENSIONS
-+
++	
 +	* src/inputmethods/imsw-multi/qmultiinputcontext.cpp
 +	  - (QMultiInputContext): Move qtrc handling into #ifndef
 +	    QT_NO_IM_EXTENSIONS
-+
++	
 +	* tools/qtconfig/mainwindow.cpp
 +	  - (MainWindow): Move qtrc handling into #ifndef QT_NO_IM_EXTENSIONS
-+
++	
 +	* src/kernel/qt_x11.pri
 +	  - Remove unnecessary configuration
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	Merge differences between qt-x11-free-3.3.2 and qt-x11-free-3.3.3
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/imsw-multi.pro
 +	* plugins/src/inputmethods/simple/simple.pro
 +	* plugins/src/inputmethods/imsw-none/imsw-none.pro
 +	* plugins/src/inputmethods/xim/xim.pro
 +	  - Remove inappropriate 'thread' from CONFIG. Thanks to Takumi
 +	    Asaki for reporting
-+
++	
 +2004-08-18  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* tools/qtconfig/mainwindow.cpp
 +	  - (MainWindow): Modify a comment
 +	  - (fileSave): Fix inappropriate /qt/DefaultInputMethodSwitcher
 +	    overwriting. Thanks Takumi Asaki for the reporting
-+
++	
 +2004-08-17  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/imsw-multi.pro
 +	* plugins/src/inputmethods/simple/simple.pro
 +	* plugins/src/inputmethods/imsw-none/imsw-none.pro
@@ -254,9 +254,9 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    $QTDIR/plugins/inputmethods/
 +	* changes.immodule
 +	  - Add a description for the change of plugin directory
-+
++	
 +2004-08-17  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qnamespace.h
 +	  - (Qt::Key) Add a comment about Korean-specific keyboard
 +	    support based on the information from Choe Hwanjin. Thanks
@@ -265,19 +265,19 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    http://freedesktop.org/pipermail/immodule-qt/2004-August/000402.html
 +	  - (Qt::Key) Comment out some Korean-specific keys that has an
 +	    equivalent generic key
-+
++	
 +2004-08-14  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This is preparation for qt-x11-immodule-unified-qt3.3.2-20040814
-+
++	
 +	* ChangeLog.immodule
 +	  - Update
-+
++	
 +2004-08-14  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* changes.immodule
 +	  - Add and modify some descriptions
-+
++	
 +	* configure
 +	  - Rewrite some codes to avoid patch rejection against Qt
 +	    3.3.3. Logically equivalent.
@@ -287,86 +287,86 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* src/widgets/qlineedit.cpp
 +	  - Rewrite some codes to avoid patch rejection against Qt
 +	    3.3.3. Logically equivalent.
-+
++	
 +2004-08-13  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	cleanup: get rid of some warnings
 +2004-08-12  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* changes.immodule
 +	  - New file. This file has been written for both users and
 +	    developers to inform important changes
-+
++	
 +2004-08-12  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This is preparation for qt-x11-immodule-unified-qt3.3.2-20040812
-+
++	
 +	* ChangeLog.immodule
 +	  - Update
-+
++	
 +2004-08-12  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (changeInputContext, createInputContext): Fix qic location
 +	  - (destroyInputContext): Add safety check
-+
++	
 +2004-08-12  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* configure
 +	  - Fix incomplete qconfig configuratoin about QT_NO_IM and
 +	    QT_NO_IM_EXTENSIONS
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (changeInputContext, createInputContext, destroyInputContext): Fix
 +	    invalid pointer reference
-+
++	
 +2004-08-12  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	fixed a compile issue in my gentoo box (gcc 3.3.3, glibc 2.3.3
 +2004-08-12  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* configure
 +	  - Fix option consistency handling between '-im' and '-im-ext'
-+
++	
 +	* README.immodule
 +	  - Fix a typo
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* README.immodule
 +	  - Modify a little
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* README.immodule
 +	  - New file. Some explanation has been described
-+
++	
 +	* ChangeLog.immodule
 +	  - New file
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/xim/qximinputcontext_x11.cpp
 +	  - (language): Remove QLocale dependency to be compiled on Qt 3.2.x
 +	    or earlier
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit merges 'Binary Compatible branch' into the trunk to
 +	  reduce maintenance cost. Now binary compatibility is
 +	  configurable. Binary incompatible features are surrounded by
 +	  #ifndef QT_NO_IM_EXTENSIONS
-+
++	
 +	* configure
 +	  - Add '-im' option to enable immodule feature (default yes).
 +	  - Add '-im-ext' option to enable more immodule extensions (default
 +	    no). Specify this option 'no' to keep binary compatibility with
 +	    standard Qt3
-+
++	
 +	* src/kernel/qt_x11.pri
 +	  - Add conditional QT_NO_IM and QT_NO_IM_EXTENSIONS definition in
 +	    accordance with '-im' and '-im-ext' options
-+
++	
 +	* src/kernel/qwidget.h
 +	  - (icHolderWidget): New function for QT_NO_IM_EXTENSIONS
 +	  - (ic): Add #ifndef QT_NO_IM_EXTENSIONS for binary incompatible
@@ -381,7 +381,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (getInputContext, changeInputContext, createInputContext,
 +	    destroyInputContext): Merge code fragments for QT_NO_IM_EXTENSIONS
 +	  - (deleteExtra): Merge a comment for QT_NO_IM_EXTENSIONS
-+
++	
 +	* src/kernel/qapplication.h
 +	  - (locateICHolderWidget, icHolderWidgets, create_xim, close_xim):
 +	    New functions for QT_NO_IM_EXTENSIONS
@@ -390,47 +390,47 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (create_xim, close_xim): Merge functions for QT_NO_IM_EXTENSIONS
 +	  - (qt_init_internal, qt_cleanup): Merge code fragments for
 +	    QT_NO_IM_EXTENSIONS
-+
++	
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - Make plugin compilations configurable with '-im' option
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/xim/qximinputcontext.h
 +	  - Replace QXIMINPUTCONTEXT_P_H with QXIMINPUTCONTEXT_H
-+
++	
 +	* src/widgets/qlineedit.cpp
 +	  - (QLineEditPrivate::updateMicroFocusHint): Modify the comment a
 +	    little
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is participating with recent 'keyword static of C++'
 +	  discussion.  See
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000344.html
 +	  for further information
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (QETWidget::translateKeyEventInternal): Prevent interwidget key
 +	    state transition about RTL extensions. This code had been written
 +	    by Daisuke Kameda in qt-x11-immodule-all-qt3.3.1-20040316.diff
-+
++	
 +	* src/widgets/qlineedit.cpp
 +	  - (QLineEditPrivate::updateMicroFocusHint): Add a comment that
 +	    explains that old rect variable is intentionally static
-+
++	
 +2004-08-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit turns the argument of QInputContext::filterEvent() into
 +	  const. See
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000335.html
 +	  for further information
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (filterEvent): Follow the API change
 +	* src/kernel/qinputcontext.cpp
 +	  - (filterEvent): Follow the API change
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.h
 +	  - (filterEvent): Follow the API change
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
@@ -439,22 +439,22 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (filterEvent): Follow the API change
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp
 +	  - (filterEvent): Follow the API change
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/simple/xcompose2q.rb
 +	  - Update to accept Compose flie of X.org's X11R6.7.0
 +	  - Accept 'XCOMM' as comment sign to accept raw source file
 +	  - Accept both " " and "\"" as valid RHS
 +	* plugins/src/inputmethods/simple/composetable.cpp
 +	  - Update Compose table from XFree86 4.3.0 to X.org's X11R6.7.0
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit replaces the invalid header words 'This file is
 +	  part of the kernel module' of following files with 'This file
 +	  is part of the input method module'
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontext.cpp
 +	* plugins/src/inputmethods/imsw-multi/qmultiinputcontextplugin.h
@@ -470,18 +470,18 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* plugins/src/inputmethods/xim/qximinputcontextplugin.h
 +	* plugins/src/inputmethods/xim/qximinputcontext.h
 +	* plugins/src/inputmethods/xim/qximinputcontext_x11.cpp
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/simple/xcompose2q.rb
 +	  - Fix broken translation entries for most ASCII characters
 +	* plugins/src/inputmethods/simple/composetable.cpp
 +	  - Translate again with fixed xcompose2q.rb. This fixes many
 +	    translation entries involving ascii character such as
 +	    "<Multi_key> <space> <minus>"
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/simple/xcompose2q.rb
 +	  - New file. This script is used for translating X's Compose
 +	    table into QSimpleInputContext's table
@@ -489,9 +489,9 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Although I had released previous versions of this script
 +	    under GPL, I have released this version under another
 +	    license. See header
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.h
 +	  - Follow Trolltech's coding style for Qt3
 +	  - Remove unnecessary headers
@@ -506,7 +506,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (isPreeditPreservationEnabled): Remove unnecessary function
 +	  - (checkComposeTable): Follow the renaming of the types of args
 +	  - (defaultComposeTable): New static member variable
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
 +	  - Separate composing table definition to composetable.cpp
 +	  - Remove unnecessary headers
@@ -529,7 +529,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (isPreeditRelocationEnabled): Remove unnecessary overloading
 +	    function
 +	  - (isPreeditPreservationEnabled): Remove unnecessary function
-+
++	
 +	* plugins/src/inputmethods/simple/composetable.cpp
 +	  - New file. This file has been separated from
 +	    qsimpleinputcontext.cpp to achieve following issues
@@ -541,35 +541,35 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Add original header from Compose file of XFree86 4.3.0
 +	  - (defaultTable) Moved from qsimpleinputcontext.cpp
 +	  - (defaultComposeTable): New variable definition
-+
++	
 +	* plugins/src/inputmethods/simple/simple.pro
 +	  - Add composetable.cpp to SOURCES
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontextplugin.cpp
 +	  - (displayName, description): Modify the descriptions appropriately
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/xim/qximinputcontext_x11.cpp
 +	  - Replace #include "qximinputcontext_p.h" with
 +	    "qximinputcontext.h". XIM plugin is now working properly
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit changes the XIM input method into plugin. A little
 +	  modification is still required to work. See next commit information
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - Remove XIM dependency
 +	  - (create, keys): Remove XIM dependent codes
-+
++	
 +	* src/input/qt_input.pri
 +	  - Remove QXIMInputContext entries
 +	* src/input/qximinputcontext_p.h
 +	  - Moved to plugins/src/inputmethods/xim/qximinputcontext.h
 +	* src/input/qximinputcontext_x11.cpp
 +	  - Moved to plugins/src/inputmethods/xim/qximinputcontext_x11.cpp
-+
++	
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - Add xim to SUBDIRS
 +	* plugins/src/inputmethods/xim
@@ -590,9 +590,9 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* plugins/src/inputmethods/xim/qximinputcontext_x11.cpp
 +	  - Moved from src/input/qximinputcontext_x11.cpp. No code changes have
 +	    been applied
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (QXIMInputContext): Remove the arg 'widget' to conform to standard
 +	    QInputContext API
@@ -603,9 +603,9 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    inproper overriding
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create): Remove the arg from QXIMInputContext()
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (setHolderWidget): New override function
 +	* src/input/qximinputcontext_x11.cpp
@@ -613,19 +613,19 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    into setHolderWidget() to allow null widget. This is required to
 +	    make imsw-none working properly
 +	  - (setHolderWidget): New function
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (x11_apply_settings): Restrict defaultIM to be an IM-switcher. An
 +	    IM-switcher has a 'imsw-' prefix
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit adds imsw-none IM-switcher plugin according to
 +	  following discussion with Takumi Asaki. Thanks for the opinion.
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000320.html
-+
++	
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - Add imsw-none to SUBDIRS
 +	* plugins/src/inputmethods/imsw-none/imsw-none.pro
@@ -640,44 +640,44 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (create): New function. Read key from QT_IM_MODULE or
 +	    /qt/DefaultInputMethod of qtrc and creates input context with the
 +	    key
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* Rename input method plugin names to accord with other plugin names
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/imsw-multi.pro
 +	  - Rename plugin name to qimsw-multi from qmultiinputcontextplugin
 +	* plugins/src/inputmethods/simple/simple.pro
 +	  - Rename plugin name to qsimple from qsimpleinputcontextplugin
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/imsw-multi/multi.pro
 +	  - Move to imsw-multi.pro
 +	* plugins/src/inputmethods/imsw-multi/imsw-multi.pro
 +	  - Move from multi.pro
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* plugins/src/inputmethods/multi
 +	  - Move to imsw-multi
 +	* plugins/src/inputmethods/imsw-multi
 +	  - Move from multi
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - Replace 'multi' with 'imsw-multi' in SUBDIRS
-+
++	
 +2004-08-10  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
 +	  - add full dead/multi key entries
 +	  - fix some bugs
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit changes pluggable popup menu API in accordance with
 +	  following discussion with Lars Knoll. Thanks for the advice.
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000300.html
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (actions): New function
 +	  - (exportMenusInto): Remove to rename to addMenusTo()
@@ -686,22 +686,22 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Follow introduction of enum QInputContextMenu::Action
 +	    * Add an explanation for this utility function to the function
 +	      description
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (QInputContextMenu::Action): New enum
 +	  - (menus): Restrict to use with Qt3 only
 +	  - (qt4menus): Remove to replace with actions()
 +	  - (actions): New function for Qt4
-+
++	
 +	* src/widgets/qtextedit.cpp
 +	  - (createPopupMenu): Replace exportMenusInto() with addMenusTo()
 +	* src/widgets/qlineedit.cpp
 +	  - (createPopupMenu): Replace exportMenusInto() with addMenusTo()
-+
++	
 +2004-08-10  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit changes the two input methods into plugin
-+
++	
 +	* src/input/qt_input.pri
 +	  - Remove QSimpleInputContext and QMultiInputContext entries
 +	* src/input/qmultiinputcontext.h
@@ -712,14 +712,14 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Moved to plugins/src/inputmethods/simple/qsimpleinputcontext.h
 +	* src/input/qsimpleinputcontext.cpp
 +	  - Moved to plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
-+
++	
 +	* plugins/src/src.pro
 +	  - Add 'inputmethods' to SUBDIRS. The directory name 'inputmethods'
 +	    is intended to be compatible with Qt/Embedded. Install directory
 +	    name is still kept as 'input' for backward compatibility
 +	* plugins/src/inputmethods/inputmethods.pro
 +	  - New file
-+
++	
 +	* plugins/src/inputmethods/multi/multi.pro
 +	  - New file
 +	* plugins/src/inputmethods/multi/qmultiinputcontextplugin.h
@@ -732,7 +732,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* plugins/src/inputmethods/multi/qmultiinputcontext.cpp
 +	  - Moved from src/input/qmultiinputcontext.cpp. No code changes have
 +	    been applied
-+
++	
 +	* plugins/src/inputmethods/simple/simple.pro
 +	  - New file
 +	* plugins/src/inputmethods/simple/qsimpleinputcontextplugin.h
@@ -745,11 +745,11 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* plugins/src/inputmethods/simple/qsimpleinputcontext.cpp
 +	  - Moved from src/input/qsimpleinputcontext.cpp. No code changes have
 +	    been applied
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create): Remove dedicated instantiation handling for
 +	    QSimpleInputContext and QMultiInputContext
-+
++	
 +	* tools/qtconfig/mainwindow.h
 +	  - (inputMethodIdentifiers): New member variable
 +	* tools/qtconfig/mainwindow.cpp
@@ -767,24 +767,24 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Save /qt/DefaultInputMethodSwitcher with default value
 +	      "imsw-multi"
 +	    * Save identifier name of the input method rather than display name
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Update the class description comment
-+
++	
 +	* src/input/qinputcontextplugin.cpp
 +	  - (class QInputContextPlugin): Update the class description comment
 +	  - (keys): Update the function description comment
 +	  - (languages, displayName, description): Add the function
 +	    description comment
-+
-+
++	
++	
 +2004-08-05  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit adds generic pluggable popup menu feature. See
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000266.html
 +	  for further information. The implementation may be altered in
 +	  accordance with discussion in the list.
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (struct QInputContextMenu): New struct
 +	  - (qt4menus): New function. Just a placeholder for now
@@ -795,7 +795,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    section to the class description comment
 +	  - (menus): New function
 +	  - (exportMenusInto): New function
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (qt4menus): New function. Just a placeholder for now
 +	  - (menus): New function
@@ -805,7 +805,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	      and QMultiInputContext's own 'Select Input Method' menu
 +	    * The functionality is ported from QLineEdit::createPopupMenu()
 +	    * An accelerator has been added as 'Select Input &Method'
-+
++	
 +	* src/widgets/qtextedit.cpp
 +	  - Remove QMultiInputContext dependency
 +	  - (createPopupMenu): Replace QMultiInputContext dependent submenu
@@ -814,27 +814,27 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Remove QMultiInputContext dependency
 +	  - (createPopupMenu): Replace QMultiInputContext dependent submenu
 +	    handling with the pluggable popup menu
-+
++	
 +	* src/kernel/qwidget.h
 +	  - Remove #include "qinputcontext.h" to reduce compile time when we
 +	    hacked qinputcontext.h
-+
++	
 +2004-08-04  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - use QInputContextFactory::description and set whatsthis help
-+
++	
 +2004-08-03  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit adds QInputContextFactory::description() feature
-+
++	
 +	* src/input/qinputcontextinterface_p.h
 +	  - Update the UUID because the interface has been changed
 +	  - (description): New function
-+
++	
 +	* src/input/qinputcontextplugin.h
 +	  - (description): New function
-+
++	
 +	* src/input/qinputcontextfactory.h
 +	  - (description): New function
 +	  - (QInputContextPluginPrivate::description): New function
@@ -842,15 +842,15 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (description): New function
 +	  - (displayName): Replace fallback value with empty string instead of
 +	    null
-+
++	
 +2004-08-03  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit alters the configuration convention about
 +	  IM-switcher. See
 +	  http://freedesktop.org/pipermail/immodule-qt/2004-August/000232.html
 +	  for further information. The implementation may be altered in
 +	  accordance with discussion in the list.
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (defaultIM): Replace "xim" with "imsw-multi"
 +	  - (x11_apply_settings):
@@ -859,13 +859,13 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Replace the qtrc variable name /qt/DefaultInputMethod with
 +	      /qt/DefaultInputMethodSwitcher
 +	    * Replace "xim" with "imsw-multi" for default plugin
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (lastCreatedIMKey): Remove to rename to currentIMKey
 +	  - (currentIMKey): New member variable. Renamed from lastCreatedIMKey
 +	    because the semantics of the variable has been changed by
 +	    introduction of QT_IM_SWITCHER
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - Replace lastCreatedIMKey with currentIMKey
 +	  - (QMultiInputContext): Add default input method specification
@@ -874,38 +874,38 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Add IM-switcher plugin elimination feature using "imsw-" prefix
 +	    * Add dispName.isNull() checking
 +	    * Apply some rewriting without altering logic for human readability
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create): Replace the identifier name "multi" with "imsw-multi"
-+
++	
 +2004-08-03  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* This commit implements table searching suite
-+
++	
 +	- QKeyEvent::text() is restricted to only one character,
 +	  so qsimpleic use QChar::unicode() value in case keys are
 +	  pressed otherwise composing keys are pressed.
-+
++	
 +	- Composing Table is temporally deleted for testing.
 +	  Need to prepare proper entries.
 +	  Now qsimpleic can deal with capital letter more cleaner way
-+
++	
 +	* Next, I introduce X's composing parser to qsimpleic
-+
++	
 +2004-08-02  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (x11_apply_settings): Merge the comment about defaultIM
 +	    overwritten by r52 from r45
-+
++	
 +2004-07-31  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	new environment variable QT_IM_MODULE to overwrite the default inputmethod plugin
 +2004-07-31  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	"deleteLater" is safer then "delete" QObject directly
 +2004-07-30  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qnamespace.h
 +	  - (Qt::Key):
 +	    * Replace dead key values with new one to avoid keycode conflict
@@ -914,50 +914,50 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* src/kernel/qevent.cpp
 +	  - (key): Add a comment about latin 1 keycodes to the function
 +	    description.
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - Define define XK_XKB_KEYS to include dead key definitions from
 +	    keysymdef.h
 +	   - Remove XK_dead_ keys definition
-+
++	
 +2004-07-29  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* Change to use displayName() in IM-Switch Popupmenu
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (keyDict): new variable
 +	* src/input/qmultiinputcontext.cpp
 +	  - (createImSelPopup): use displanName() on popup and store key in keyDict
 +	  - (changeInputMethodWithMenuId): find key from using keyDict
-+
++	
 +	* Problem *
 +	  - if key=="XIM", displayName(key) is QString::null
 +	* Wish *
 +	  - add "virtual QString description( const QString &key ) = 0;" for showing the description of IM on PopupMenu as a whatsthis help
-+
++	
 +2004-07-28  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qinputcontextinterface_p.h
 +	  - Update the UUID because the interface has been changed
 +	  - (languages): New function
 +	  - (displayName): New function
-+
++	
 +	* src/input/qinputcontextplugin.h
 +	  - (languages): New function
 +	  - (displayName): New function
 +	* src/input/qinputcontextplugin.cpp
 +	  - (QInputContextPluginPrivate::languages): New function
 +	  - (QInputContextPluginPrivate::displayName): New function
-+
++	
 +	* src/input/qinputcontextfactory.h
 +	  - (languages): New function
 +	  - (displayName): New function
 +	* src/input/qinputcontextfactory.cpp
 +	  - (languages): New function
 +	  - (displayName): New function
-+
++	
 +2004-07-27  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (deletionRequested): New signal. Added for fatal error handling
 +	* src/kernel/qinputcontext.cpp
@@ -970,7 +970,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Connect deletionRequested() signal of qic to destroyInputContext()
 +	    * Follow renaming of QApplication::imEventReceived() to postIMEvent()
 +	  - (destroyInputContext): Modify the function description comment
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (close): New function
 +	* src/input/qximinputcontext_x11.cpp
@@ -978,7 +978,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Remove invalid QApplication::close_im() invocation
 +	    * Add proper finalization using deletionRequested() signal
 +	  - (close): New function
-+
++	
 +	* src/kernel/qapplication.h
 +	  - (imEventReceived): Remove this inappropriate name to rename to
 +	    postIMEvent()
@@ -989,7 +989,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (postIMEvent): New slot. Renamed from imEventReceived()
 +	  - (close_im): Remove unused commented out code. The code had already
 +	    been moved to qximinputcontext.cpp
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (destroyInputContext): New slot
 +	  - (imEventReceived): Remove this inappropriate name to rename to
@@ -1021,30 +1021,30 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (createPopupMenu):
 +	    * Add NULL check for input context
 +	    * Replace the label "SelectInputMethod" with "Select Input Method"
-+
++	
 +2004-07-27  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (changeInputContext):
 +	    * Remove unnecessary createInputContext()
 +	    * Reorder the code fragments to reduce temporal memory consumption
-+
++	
 +2004-07-27  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment and variable name update. No actual code is
 +	  modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Modify the class description comment
 +	  - (filterEvent): Mark the argument as /* const */ to make it const
 +	    in future
 +	  - (reset): Add a requirement to the function description comment for
 +	    reimplementation
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (locateICHolderWidget, icHolderWidgets, changeAllInputContext):
 +	    Modify the function description comment
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (changeInputContext):
 +	    * Rename 'name' with 'identifierName' to eliminate the ambiguity
@@ -1055,7 +1055,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Modify the function description comment
 +	    * Modify a comment
 +	  - (resetInputContext): Modify the function description comment
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (defaultIM): Modify the comment
 +	  - (changeAllInputContext):
@@ -1063,16 +1063,16 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Follow Trolltech's coding style
 +	  - (defaultInputMethod): Modify the function description comment
 +	  - (x11_apply_settings): Modify a comment
-+
++	
 +	* src/input/qinputcontextplugin.cpp
 +	  - (class QInputContextPlugin): Modify the class description comment
 +	  - (create): Modify the function description comment
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create): Modify the function description comment
-+
++	
 +2004-07-24  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - Add #if defined(Q_WS_X11) around X11 platform specific
 +	    functions. these functions cannot be moved to
@@ -1081,46 +1081,46 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    Qt4.
 +	  - (filterEvent): Add the function description comment according
 +	    with the Simplified API (filtering precedence, key compression)
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (locateICHolderWidget, icHolderWidgets, changeAllInputContext):
 +	    Modify the function description comment
-+
++	
 +2004-07-24  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment update. No code is modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Add the class description comment according
 +	    with the Simplified API (preedit relocation is done, not entirely
 +	    completed yet)
-+
++	
 +2004-07-24  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit contains the fixes in response to Lars Knoll's
 +	  advice. Thanks for the advice.
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (x11_apply_settings): Remove trUtf8() from "xim" to specify the
 +	    default input method
-+
++	
 +	* src/kernel/qapplication_x11.cpp, src/input/qximinputcontext_x11.cpp
 +	  - (ximServer, xim_preferred_style, composingKeycode, input_mapper):
 +	    Add qt_ prefix to avoid symbol space pollution
 +	  - (qt_ximServer, qt_xim_preferred_style, qt_ximComposingKeycode,
 +	    qt_input_mapper): Renamed from above one
-+
++	
 +2004-07-24  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment update. No code is modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Modify several expressions
-+
++	
 +2004-07-23  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment update. No code is modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Add the class description comment according
 +	    with the Simplified API (preedit preservation is done, not
@@ -1128,9 +1128,9 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - (QInputContext, focusWidget, setFocusWidget, isComposing,
 +	    setFocus, unsetFocus): Modify a typo in the function description
 +	    comment
-+
++	
 +2004-07-23  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qsimpleinputcontext.cpp
 +	  - Modify the file header description
 +	* src/input/qmultiinputcontext.cpp
@@ -1139,19 +1139,19 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	  - Modify the file header description
 +	* src/input/qmultiinputcontext.h
 +	  - Modify the file header description
-+
++	
 +2004-07-23  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qsimpleinputcontext.h
 +	  - Add a copyright and license header
-+
++	
 +	* src/input/qsimpleinputcontext.cpp
 +	  - Add a copyright and license header
-+
++	
 +2004-07-23  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment update. No code is modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (class QInputContext): Add the class description comment according
 +	    with the Simplified API (not completed yet)
@@ -1159,39 +1159,39 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    comment
 +	  - (sendIMEventInternal, font): Modify a typo in the function
 +	    description comment
-+
++	
 +2004-07-23  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qsimpleinputcontext.cpp
 +	  - OOps. fix typo.
-+
++	
 +2004-07-23  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qsimpleinputcontext.cpp
 +	  - follow Qt coding rule
-+	  - more valid capitalize case
-+
++	  - more valid capitalize case 
++	
 +2004-07-23  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - enable QSimpleInputContext by specifying in qtrc "DefaultInputMethod=simple"
-+
++	
 +2004-07-23  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* This commit add simple table based InputContext for dead/multi key support
-+
++	
 +	* src/input/qsimpleinputcontext.h, src/input/qsimpleinputcontext.cpp
 +	  - simple table based InputContext
-+
++	
 +2004-07-22  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* kernel/qapplication_x11.cpp, kernel/qnamespace.h
 +	  - add dead key entries
-+
++	
 +2004-07-22  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit is a comment update. No code is modified.
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (holderWidget, setHolderWidget, focusWidget, setFocusWidget,
 +	    releaseComposingWidget, isPreeditRelocationEnabled, isComposing,
@@ -1205,123 +1205,123 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    function description comment
 +	  - (setMicroFocus, mouseHandler, reset, identifierName, language):
 +	    Modify a expression in the function description comment
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (icHolderWidget, resetInputContext, focusInputContext,
 +	    unfocusInputContext, sendMouseEventToInputContext): Update the
 +	    function description comment
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (imEventReceived): Update the function description comment
-+
++	
 +2004-07-21  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (createImSelPopup): new function
 +	  - (changeInputMethodWithMenuId): new slot
 +	  - (changeInputMethod(QString)): new function
 +	  - (popup): new variable
 +	  - (lastCreatedIMKey): new variable
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - add #ifndef QT_NO_IM
 +	  - (createImSelPopup): create QPopupMenu object which can switch IM.
 +	    Currently selected IM is marked as checked.
-+
++	
 +	* src/input/qinputcontextfactory.h
 +	  - remove "class QPopupMenu"
-+
++	
 +	* src/widget/qtextedit.cpp
 +	  - add im-switch popup to the menu which is shown when widget is right-clicked.
-+
++	
 +	* src/widget/qlineedit.cpp
 +	  - add im-switch popup to the menu which is shown when widget is right-clicked.
-+
++	
 +2004-07-21  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (filterEvent, setMicroFocus, mouseHandler): Update the function
 +	    description comment according with the Simplified API
 +	  - (reset, identifierName, language): Update the function description
 +	    comment
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - (changeInputMethod): Fix invalid imIndex circulation. Thanks
 +	    to Kazuki for reporting
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit enables a flexible signal connection
 +	  configuration. Default behavior is based on Cougar's
 +	  suggestion. Thanks.
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - (beIndirectlyConnected): New instance variable
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - (QMultiInputContext): Add beIndirectlyConnected to initializer list
 +	  - (imEventReceived): Add a function description comment
 +	  - (changeInputMethod): Connect imEventGenerated signal of slave
 +	    according with beIndirectlyConnected. The default behavior is
 +	    changed as directly connected to imEventGenerated signal of this
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (setMicroFocusHint): Update the comment about XIM handling
 +	  - (focusInputContextunfocusInputContext,
 +	    sendMouseEventToInputContext): Add the function description comment
-+
++	
 +	* src/kernel/qinputcontext_x11.cpp
 +	  - (x11FilterEvent): Update the function description comment
 +	    according with the Simplified API
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qmultiinputcontext.cpp
 +	  - (changeInputMethod): Fix the conversion to const char * from
 +	    identifierName()
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (identifierName): Replace the result "XIM" with "xim" to be
 +	    consistent with corresponding immodule of GTK+
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (defaultIM, x11_apply_settings): Replace "XIM" with "xim"
-+
++	
 +	* src/input/qinputcontextfactory.cpp
 +	  - (create, keys): Replace "XIM" with "xim"
-+
++	
 +	* tools/qtconfig/mainwindow.cpp
 +	  - (MainWindow): Replace "XIM" with "xim"
-+
++	
 +2004-07-20  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit enables QInputContext proxying, and provide an
 +	  experimental immodule-switcher QMultiInputContext as its
 +	  examples. The changes is following.
-+
++	
 +	  1. Use signal to deliver QIMEvent instead of explicit
 +	     postEvent(). This enables QIMEvent proxying and better platform
 +	     abstraction. Corresponding slot is created as
 +	     QApplication::imEventReceived().
-+
++	
 +	  2. Move some methods of QInputContext to public from protected or
 +	     private. This enables that proxy-IM can access slave methods.
-+
++	
 +	  3. Make some methods of QInputContext virtual. This enables
 +	     overriding the methods as proxy
-+
++	
 +	  4. Rename QInputContext::name() to identifierName() to avoid
 +	     conflicting with QObject::name()
-+
++	
 +	  This patch does not break binary compatibility from vanilla Qt3.
 +	  But it costs immodule developer small modification.
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - (class QInputContext): Inherit QObject and add Q_OBJECT macro
 +	  - (name): Remove to rename to identifierName() to avoid conflicting
@@ -1335,7 +1335,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Make public from protected
 +	    * Make virtual to allow overriding the method as proxy
 +	  - (imEventGenerated): New signal
-+
++	
 +	* src/kernel/qinputcontext.cpp
 +	  - (QInputContext): Add QObject() to initializer list
 +	  - (sendIMEventInternal): Replace QApplication::postEvent with signal
@@ -1346,19 +1346,19 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * New function. Renamed from name()
 +	    * Return type has changed to QCString from QString to avoid using
 +	      of i18n string and confusing this with display name for endusers
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (changeInputContext): Add QObject::connect() to follow the change
 +	    of IMEvent flow
 +	  - (createInputContext): Add QObject::connect() to follow the change
 +	    of IMEvent flow
-+
++	
 +	* src/kernel/qapplication.h
 +	  - (imEventReceived): New slot
 +	* src/kernel/qapplication_x11.cpp
 +	  - (imEventReceived): New slot to relay QIMEvent to event queue using
 +	    postEvent()
-+
++	
 +	* src/input/qmultiinputcontext.h
 +	  - New file. Copyright and licensing information is temporarily
 +	    adapted to our cirmumstances
@@ -1421,7 +1421,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    "multi" to specify it
 +	* src/input/qinputcontextfactory.h
 +	  - Add #include "qinputcontext.h" to avoid compilation error
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (class QXIMInputContext): Add Q_OBJECT macro to follow the API change
 +	  - (name): Remove to follow the API change
@@ -1436,91 +1436,91 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	* src/input/qximinputcontext_x11.cpp
 +	  - (isComposing): Remove unnecessary access permission breaker
 +	    because QInputContext::isComposing() have made public
-+
++	
 +	* src/input/qt_input.pri
 +	  - Add qmultiinputcontext.h and multiinputcontext.cpp
-+
++	
 +2004-07-18  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	use virtual insert version to make subclasses work as expected (merged from bc-branch r19)
 +2004-07-16  Kazuki Ohta  <mover@hct.zaq.ne.jp>
-+
++	
 +	* src/input/qinputcontextfactory.h: not the definition of QInputContextPlugin
-+
++	
 +2004-07-13  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qapplication_x11.cpp
 +	  - (x11ProcessEvent): Add comment for key event filtering considerations
 +	  - (QETWidget::translateKeyEvent): Add comment for key compression
 +	    considerations
-+
++	
 +2004-07-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* src/kernel/qwidget.h
 +	  - (sendMouseEventToInputContext): Move into #if defined(Q_WS_X11)
 +	    because it is not implemented in other platforms
-+
++	
 +2004-07-11  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* This commit fixes a mismerge with my Simplified API patches
-+
++	
 +	* src/kernel/qwidget_x11.cpp
 +	  - (destroyInputContext): Replace the code with original Simplified
 +	    API patch. See the comment to recognize the original intention
 +	  - (focusInputContext): Fix a condition to call qic->setFocus() as
 +	    originally written. See added comment to recognize the original
 +	    intention
-+
++	
 +	* src/kernel/qwidget.h
 +	  - (changeInputContext): Move into #if defined(Q_WS_X11) as
 +	    originally written because it is not implemented in other
 +	    platforms
-+
++	
 +	* src/input/qximinputcontext_p.h
 +	  - (mouseHandler): Fix a typo as originally written
-+
++	
 +	* src/input/qximinputcontext_x11.cpp
 +	  - Fix a comment location to express original intention
-+
++	
 +2004-07-08  LiuCougar  <liucougar@gmail.com>
-+
++	
 +	replace sendEvent with postEvent in qinputcontext to improve the process performance of IMCompose events
 +2004-07-08  YamaKen  <yamaken@bp.iij4u.or.jp>
-+
++	
 +	* Insert the comment 'UPDATED COMMENT REQUIRED' into some places for future
 +	  modifications
 +	* Modify some comments
 +	* Replace 'InputMethod' in some comments with 'input method'
 +	* Replace 'InputContext' in some comments with 'input context'
-+
++	
 +	* src/kernel/qinputcontext.h
 +	  - Move description of QInputContext to qinputcontext.cpp
 +	* src/kernel/qinputcontext.cpp
 +	  - Move description of QInputContext from qinputcontext.h
-+
++	
 +2004-07-07  Daisuke Kameda  <kaminmat@cc.rim.or.jp>
-+
++	
 +	Adding the function which realize mapping arbitrary input context and widget:
 +	QApplication::locateICHolderWidget()
 +	QApplication::icHolderWidgets()
 +	QWidget::icHolderWidget()
 +	QWidget::getInputContext()
-+
++	
 +	Adding the function which changes input method:
 +	QApplication::changeAllInputContext()
 +	QWidget::changeInputContext()
 +	QApplication::defaultInputMethod()
-+
++	
 +	change QApplication::create_xim() to QApplication::create_im()
 +	change QApplication::close_xim() to QApplication::close_im()
-+
-+
++	
++	
 +2004-07-06  Daisuke Kameda  <kaminmat@cc.rim.or.jp>
-+
++	
 +	"QLineEdit should only setMicroFocus if the cursorRect has changed" by cougar
-+
++	
 +2004-07-06  Daisuke Kameda  <kaminmat@cc.rim.or.jp>
-+
++	
 +	Re-Creating immodule for Qt/X11 trunk
 +
 +2004-06-22  YamaKen  <yamaken@bp.iij4u.or.jp>
@@ -1773,7 +1773,7 @@ diff -duNr qt-x11-free-3.3.8.orig/ChangeLog.immodule qt-x11-free-3.3.8/ChangeLog
 +	    * Remove unnecessary QInputContext::unsetFocus()
 +	  - (close_xim):
 +	    * Follow replacing to ximContextList
-+	    * Follow API change
++	    * Follow API change 
 +	  - (close, hasFocus): New function. Exported interface for
 +	    xic_draw_callback to access protected features
 +	  - (setFocus, unsetFocus): Follow API change
@@ -2286,7 +2286,7 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +++ qt-x11-free-3.3.8/configure	2007-03-20 23:18:45.000000000 +0900
 @@ -223,7 +223,7 @@
  fi
-
+ 
  # licensed modules depend on type of commercial license
 -MODULES="styles tools kernel widgets dialogs iconview workspace"
 +MODULES="styles tools kernel widgets dialogs iconview workspace inputmethod"
@@ -2304,9 +2304,9 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
  CFG_XKB=auto
  CFG_NIS=auto
 @@ -401,6 +404,12 @@
-	VAR=fatal_error
-	VAL=no
-	;;
+ 	VAR=fatal_error
+ 	VAL=no
+ 	;;
 +    #Qt style yes options for immodule
 +    #Keep this place to avoid patch rejection
 +    -inputmethod|-inputmethod-ext)
@@ -2314,12 +2314,12 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +	VAL=yes
 +	;;
      -embedded)
-	VAR=embedded
-	# this option may or may not be followed by an argument
+ 	VAR=embedded
+ 	# this option may or may not be followed by an argument
 @@ -1020,6 +1029,20 @@
      dlopen-opengl)
-	CFG_DLOPEN_OPENGL="$VAL"
-	;;
+ 	CFG_DLOPEN_OPENGL="$VAL"
+ 	;;
 +    inputmethod)
 +	if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
 +	    CFG_IM="$VAL"
@@ -2335,12 +2335,12 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +	fi
 +	;;
      *)
-	UNKNOWN_OPT=yes
-	;;
+ 	UNKNOWN_OPT=yes
+ 	;;
 @@ -1899,6 +1922,13 @@
      CFG_GFX_AVAILABLE=`echo $CFG_GFX_AVAILABLE`
  fi
-
+ 
 +# immodule extensions
 +if [ "$CFG_IM" = "no" ]; then
 +    CFG_IM_EXT=no
@@ -2348,7 +2348,7 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +if [ "$CFG_IM_EXT" = "yes" ]; then
 +    CFG_IM=yes
 +fi
-
+ 
  #-------------------------------------------------------------------------------
  # help - interactive parts of the script _after_ this section please
 @@ -2206,6 +2236,20 @@
@@ -2370,12 +2370,12 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +        IXN=" "
 +    fi
      cat << EOF
-
+ 
  Qt/X11 only:
 @@ -2254,6 +2298,14 @@
      -dlopen-opengl ..... Qt uses dlopen(3) to resolve OpenGL functions
-			 (instead of linking with OpenGL libraries directly).
-
+ 			 (instead of linking with OpenGL libraries directly).
+ 
 + $IMN  -no-inputmethod .... Do not compile immodule (extensible input method)
 +			 support.
 + $IMY  -inputmethod ....... Compile immodule support.
@@ -2386,7 +2386,7 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +
  EOF
  fi
-
+ 
 @@ -2983,6 +3035,16 @@
      if [ "$CFG_XKB" = "yes" ]; then
          QMAKE_CONFIG="$QMAKE_CONFIG xkb"
@@ -2403,7 +2403,7 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +    fi
  elif [ "$PLATFORM_MAC" = "yes" ]; then
      if [ "$CFG_TABLET" = "yes" ]; then
-	QMAKE_CONFIG="$QMAKE_CONFIG tablet"
+ 	QMAKE_CONFIG="$QMAKE_CONFIG tablet"
 @@ -3107,7 +3169,7 @@
  #     minimal-config small-config medium-config large-config full-config
  #
@@ -2434,16 +2434,16 @@ diff -duNr qt-x11-free-3.3.8.orig/configure qt-x11-free-3.3.8/configure
 +ALL_OPTIONS="styles tools kernel widgets dialogs iconview workspace inputmethod network canvas table xml opengl sql stl"
  BUILD_CONFIG=
  BUILD_OPTIONS=
-
+ 
 @@ -3153,7 +3217,7 @@
-	BUILD_CONFIG="$config_option"
-	;;
-
+ 	BUILD_CONFIG="$config_option"
+ 	;;
+ 
 -    styles|tools|kernel|widgets|dialogs|iconview|workspace|network|canvas|table|xml|opengl|sql|stl)
 +    styles|tools|kernel|widgets|dialogs|iconview|workspace|inputmethod|network|canvas|table|xml|opengl|sql|stl)
-	# these config options affect the Qt API/ABI. they should influence
-	# the generation of the buildkey, so we don't skip them
-	SKIP="no"
+ 	# these config options affect the Qt API/ABI. they should influence
+ 	# the generation of the buildkey, so we don't skip them
+    	SKIP="no"
 @@ -3500,6 +3564,8 @@
      echo "XRender support ..... $CFG_XRENDER"
      echo "Xft support ......... $CFG_FREETYPE"
@@ -6255,39 +6255,6 @@ diff -duNr qt-x11-free-3.3.8.orig/configure.orig qt-x11-free-3.3.8/configure.ori
 +echo Qt is now configured for building. Just run $MAKE.
 +echo To reconfigure, run $MAKE confclean and configure.
 +echo
-diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.h qt-x11-free-3.3.8/src/widgets/qlineedit.h
---- qt-x11-free-3.3.8.orig/src/widgets/qlineedit.h	2007-03-20 22:11:18.000000000 +0900
-+++ qt-x11-free-3.3.8/src/widgets/qlineedit.h	2007-03-20 23:18:42.000000000 +0900
-@@ -196,6 +196,7 @@
-     void dropEvent( QDropEvent * );
- #endif
-     void contextMenuEvent( QContextMenuEvent * );
-+    bool sendMouseEventToInputContext( QMouseEvent *e );
-     virtual QPopupMenu *createPopupMenu();
-     void windowActivationChange( bool );
- #ifndef QT_NO_COMPAT
-diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.h qt-x11-free-3.3.8/src/widgets/qtextedit.h
---- qt-x11-free-3.3.8.orig/src/widgets/qtextedit.h	2007-03-20 22:11:18.000000000 +0900
-+++ qt-x11-free-3.3.8/src/widgets/qtextedit.h	2007-03-20 23:18:42.000000000 +0900
-@@ -211,7 +211,9 @@
-     enum TextInsertionFlags {
-	RedoIndentation = 0x0001,
-	CheckNewLines = 0x0002,
--	RemoveSelected = 0x0004
-+	RemoveSelected = 0x0004,
-+	AsIMCompositionText = 0x0008,  // internal use
-+	WithIMSelection = 0x0010       // internal use
-     };
-
-     QTextEdit( const QString& text, const QString& context = QString::null,
-@@ -439,6 +441,7 @@
-     void contentsDropEvent( QDropEvent *e );
- #endif
-     void contentsContextMenuEvent( QContextMenuEvent *e );
-+    bool sendMouseEventToInputContext( QMouseEvent *e );
-     bool focusNextPrevChild( bool next );
-     QTextDocument *document() const;
-     QTextCursor *textCursor() const;
 diff -duNr qt-x11-free-3.3.8.orig/make-symlinks.sh qt-x11-free-3.3.8/make-symlinks.sh
 --- qt-x11-free-3.3.8.orig/make-symlinks.sh	1970-01-01 09:00:00.000000000 +0900
 +++ qt-x11-free-3.3.8/make-symlinks.sh	2007-03-20 23:18:45.000000000 +0900
@@ -6788,12 +6755,12 @@ diff -duNr qt-x11-free-3.3.8.orig/plugins/src/inputmethods/imsw-multi/qmultiinpu
 +    QFont font() const;
 +    bool isComposing() const;
 +    bool isPreeditRelocationEnabled();
-+
++    
 +#if (QT_VERSION-0 >= 0x040000)
 +    QPtrList<QMenu> *qt4menus();
 +#endif
 +    QPtrList<QInputContextMenu> *menus();
-+    QPopupMenu *createImSelPopup();
++    QPopupMenu *createImSelPopup();    
 +
 +#if defined(Q_WS_X11)
 +    QWidget *focusWidget() const;
@@ -6814,7 +6781,7 @@ diff -duNr qt-x11-free-3.3.8.orig/plugins/src/inputmethods/imsw-multi/qmultiinpu
 +protected:
 +    QInputContext *slave();
 +    const QInputContext *slave() const;
-+
++    
 +    void changeInputMethod( int newIndex );
 +    void changeInputMethod( QString name );
 +
@@ -12942,7 +12909,7 @@ diff -duNr qt-x11-free-3.3.8.orig/plugins/src/inputmethods/simple/qsimpleinputco
 +        QString text = keyevent->text();
 +        if ( text.isEmpty() )
 +            return FALSE;
-+
++        
 +        // If not composing keys are pressed, use the character's unicode value
 +        // NOTE : The contents of QKeyEvent::text() is restricted to
 +        // only one character. See description of
@@ -13457,7 +13424,7 @@ diff -duNr qt-x11-free-3.3.8.orig/plugins/src/inputmethods/simple/xcompose2q.rb 
 +  "dead_belowdot"          => "0y1260",
 +  "dead_hook"              => "0y1261",
 +  "dead_horn"              => "0y1262",
-+
++  
 +  "0" => "0x0030",
 +  "1" => "0x0031",
 +  "2" => "0x0032",
@@ -15065,16 +15032,16 @@ diff -duNr qt-x11-free-3.3.8.orig/plugins/src/src.pro qt-x11-free-3.3.8/plugins/
 +++ qt-x11-free-3.3.8/plugins/src/src.pro	2007-03-20 23:18:47.000000000 +0900
 @@ -1,10 +1,10 @@
  TEMPLATE = subdirs
-
+ 
  shared {
 -	SUBDIRS	*= accessible codecs imageformats sqldrivers styles
 +	SUBDIRS	*= accessible codecs imageformats inputmethods sqldrivers styles
-	embedded:SUBDIRS *=  gfxdrivers
+ 	embedded:SUBDIRS *=  gfxdrivers
  }
  dll {
 -	SUBDIRS	*= accessible codecs imageformats sqldrivers styles
 +	SUBDIRS	*= accessible codecs imageformats inputmethods sqldrivers styles
-	embedded:SUBDIRS *=  gfxdrivers
+ 	embedded:SUBDIRS *=  gfxdrivers
  }
 diff -duNr qt-x11-free-3.3.8.orig/README.immodule qt-x11-free-3.3.8/README.immodule
 --- qt-x11-free-3.3.8.orig/README.immodule	1970-01-01 09:00:00.000000000 +0900
@@ -15505,7 +15472,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/inputmethod/qinputcontextinterface_p.h qt-
 +
 +// old version interface in qt-x11-immodule-bc-qt3.3.2-20040623.diff:
 +// {6C2B9EDE-B63C-14c9-A729-3C7643739C4C}
-+//
++// 
 +// new version interface:
 +// {a5f5c63d-e044-11d8-9718-000d6077a78d}
 +// {b0bf3e59-e526-11d8-80da-000d6077a78d}
@@ -15854,9 +15821,9 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
 --- qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qapplication.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -3161,6 +3161,35 @@
-	};
+ 	};
      }
-
+ 
 +#if !defined(QT_NO_IM)
 +    // if this is one of the compressible IM events, do compression
 +    else if ( event->type() == QEvent::IMCompose ) {
@@ -15866,7 +15833,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
 +	    while ( (cur=l->current()) != 0 &&
 +		    ( cur->receiver != receiver ||
 +		      cur->event == 0 ||
-+		      cur->event->type() != event->type() ||
++		      cur->event->type() != event->type() || 
 +		      cur->event->type() != QEvent::IMStart ) )
 +		l->prev();
 +	    if ( l->current() != 0 ) {
@@ -15890,7 +15857,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
      event->posted = TRUE;
      QPostEvent * pe = new QPostEvent( receiver, event );
 @@ -3307,6 +3336,23 @@
-
+ 
  void QApplication::removePostedEvents( QObject *receiver )
  {
 +    removePostedEvents( receiver, 0 );
@@ -15911,8 +15878,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
 +void QApplication::removePostedEvents( QObject *receiver, int event_type )
 +{
      if ( !receiver )
-	return;
-
+ 	return;
+ 
 @@ -3325,18 +3371,24 @@
      // leave the QPostEvent objects; they'll be deleted by
      // sendPostedEvents().
@@ -15934,7 +15901,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
 +	    l->remove();
 +	} else {
 +	    l->next();
-	}
+ 	}
 -	l->remove();
      }
 -    delete l;
@@ -15943,16 +15910,16 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.cpp qt-x11-free-3.3.8/
 +	delete l;
 +    }
  }
-
-
+ 
+ 
 @@ -3521,6 +3573,8 @@
-	focus_widget = 0;
+ 	focus_widget = 0;
  #ifdef Q_WS_WIN
-	QInputContext::accept( tmp );
+ 	QInputContext::accept( tmp );
 +#elif defined(Q_WS_X11)
 +	tmp->unfocusInputContext();
  #endif
-	QApplication::sendSpontaneousEvent( tmp, &out );
+ 	QApplication::sendSpontaneousEvent( tmp, &out );
      } else if ( active_window ) {
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.h qt-x11-free-3.3.8/src/kernel/qapplication.h
 --- qt-x11-free-3.3.8.orig/src/kernel/qapplication.h	2007-03-20 22:11:17.000000000 +0900
@@ -15990,7 +15957,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.h qt-x11-free-3.3.8/sr
 @@ -328,6 +342,12 @@
      friend void qt_init(int *, char **, QApplication::Type);
  #endif
-
+ 
 +#if defined(Q_WS_X11)
 +private slots:
 +    void postIMEvent( QObject *receiver, QIMEvent *event );
@@ -16011,15 +15978,15 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication.h qt-x11-free-3.3.8/sr
  #endif
 +    static QString defaultIM; // default input method's name in this application.
 +#endif
-
+ 
      static QSize     app_strut;
  #ifndef QT_NO_COMPONENT
 @@ -396,6 +419,7 @@
-
+ 
      static bool      sendSpontaneousEvent( QObject *receiver, QEvent *event );
      static void      removePostedEvent( QEvent * );
 +    static void      removePostedEvents( QObject *receiver, int event_type );
-
+ 
      friend class QWidget;
      friend class QETWidget;
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.3.8/src/kernel/qapplication_x11.cpp
@@ -16027,14 +15994,14 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +++ qt-x11-free-3.3.8/src/kernel/qapplication_x11.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -89,7 +89,9 @@
  #include "qfileinfo.h"
-
+ 
  // Input method stuff - UNFINISHED
 -#include "qinputcontext_p.h"
 +#ifndef QT_NO_IM
 +#include "qinputcontext.h"
 +#endif // QT_NO_IM
  #include "qinternal_p.h" // shared double buffer cleanup
-
+ 
  #if defined(QT_THREAD_SUPPORT)
 @@ -189,10 +191,9 @@
  static const char *mwGeometry	= 0;		// main widget geometry
@@ -16049,8 +16016,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
  static char    *appDpyName	= 0;		// X11 display name
  static bool	appForeignDpy	= FALSE;        // we didn't create display
 @@ -391,14 +392,14 @@
-
-
+ 
+ 
  #if !defined(QT_NO_XIM)
 -XIM		qt_xim			= 0;
 +//XIM		qt_xim			= 0;
@@ -16059,12 +16026,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
  static XIMStyle xim_default_style	= XIMPreeditCallbacks | XIMStatusNothing;
 -static XIMStyle	xim_preferred_style	= 0;
  #endif
-
+ 
 -static int composingKeycode=0;
 -static QTextCodec * input_mapper = 0;
 +int qt_ximComposingKeycode=0;
 +QTextCodec * qt_input_mapper = 0;
-
+ 
  Q_EXPORT Time	qt_x_time = CurrentTime;
  Q_EXPORT Time	qt_x_user_time = CurrentTime;
 @@ -511,8 +512,7 @@
@@ -16078,23 +16045,23 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
      bool translatePaintEvent( const XEvent * );
      bool translateConfigEvent( const XEvent * );
 @@ -529,114 +529,120 @@
-
-
+ 
+ 
  // ************************************************************************
 -// X Input Method support
 +// Input Method support
  // ************************************************************************
-
+ 
 -#if !defined(QT_NO_XIM)
 +/*!
 +    An identifier name of the default input method.
 +*/
 +QString	QApplication::defaultIM = "imsw-multi";
-
+ 
 -#if defined(Q_C_CALLBACKS)
 -extern "C" {
 -#endif // Q_C_CALLBACKS
-
+ 
 -#ifdef USE_X11R6_XIM
 -    static void xim_create_callback(XIM /*im*/,
 -				    XPointer /*client_data*/,
@@ -16106,7 +16073,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +/*!
 +    This function handles the query about location of the widget
 +    holding the QInputContext instance for widget \a w.
-
+ 
 -    static void xim_destroy_callback(XIM /*im*/,
 -				     XPointer /*client_data*/,
 -				     XPointer /*call_data*/)
@@ -16118,7 +16085,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 -    }
 +    The input context is used for text input to widget \a w. By
 +    default, it returns the top-level widget of \a w.
-
+ 
 -#endif // USE_X11R6_XIM
 +    If you want to change the mapping of widget \w to QInputContext
 +    instance, reimplement both this function and
@@ -16126,7 +16093,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    browser. The browser should allocate a input context per tab
 +    widget because users may switch the tabs and input a new text
 +    during previous input contexts live.
-
+ 
 -#if defined(Q_C_CALLBACKS)
 +    See also 'Sharing input context between text widgets' and 'Preedit
 +    preservation' section of the class description of QInputContext.
@@ -16138,12 +16105,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    return w->topLevelWidget();
  }
 -#endif // Q_C_CALLBACKS
-
+ 
 -#endif // QT_NO_XIM
-
+ 
 +/*!
 +    This function returns all widgets holding QInputContext.
-
+ 
 -/*! \internal
 -  Creates the application input method.
 - */
@@ -16161,7 +16128,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 -    if ( qt_xim ) {
 +    return QApplication::topLevelWidgets();
 +}
-
+ 
 -#ifdef USE_X11R6_XIM
 -	XIMCallback destroy;
 -	destroy.callback = (XIMProc) xim_destroy_callback;
@@ -16169,7 +16136,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 -	if ( XSetIMValues( qt_xim, XNDestroyCallback, &destroy, (char *) 0 ) != 0 )
 -	    qWarning( "Xlib dosn't support destroy callback");
 -#endif // USE_X11R6_XIM
-
+ 
 -	XIMStyles *styles = 0;
 -	XGetIMValues(qt_xim, XNQueryInputStyle, &styles, (char *) 0, (char *) 0);
 -	if ( styles ) {
@@ -16211,15 +16178,15 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	++it;
 +    }
 +    delete list;
-
+ 
 -	    // qDebug("QApplication: using im style %lx", qt_xim_style);
 -	    XFree( (char *)styles );
 -	}
 +    // defaultIM = identifierName ; // Change of defaultIM -- default input method -- may be enabled.
 +}
-
+ 
 -	if ( qt_xim_style ) {
-
+ 
 -#ifdef USE_X11R6_XIM
 -	    XUnregisterIMInstantiateCallback(appDpy, 0, 0, 0,
 -					     (XIMProc) xim_create_callback, 0);
@@ -16227,7 +16194,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +/*!
 +    \internal
 +    This is an internal function, you should never call this.
-
+ 
 -	    QWidgetList *list= qApp->topLevelWidgets();
 -	    QWidgetListIt it(*list);
 -	    QWidget * w;
@@ -16286,7 +16253,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	qt_xim_preferred_style = xim_default_style;
  #endif // QT_NO_XIM
  }
-
+ 
 @@ -644,6 +650,43 @@
  /*! \internal
    Closes the application input method.
@@ -16334,7 +16301,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 @@ -651,7 +694,10 @@
      // XCloseIM( qt_xim );
      // We prefer a less serious memory leak
-
+ 
 -    qt_xim = 0;
 +    // if ( qt_xim )
 +    // 	qt_xim = 0;
@@ -16344,19 +16311,19 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
      QWidgetListIt it(*list);
      while(it.current()) {
 @@ -659,9 +705,8 @@
-	++it;
+ 	++it;
      }
      delete list;
 -#endif // QT_NO_XIM
  }
 -
 +#endif
-
+ 
  /*****************************************************************************
    Default X error handlers
 @@ -1032,18 +1077,40 @@
-	settings.readBoolEntry("/qt/useRtlExtensions", FALSE);
-
+     	settings.readBoolEntry("/qt/useRtlExtensions", FALSE);
+ 
  #ifndef QT_NO_XIM
 -    if (xim_preferred_style == 0) {
 +    if (qt_xim_preferred_style == 0) {
@@ -16399,22 +16366,22 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	defaultIM = "imsw-multi";
      }
  #endif
-
+ 
 @@ -1079,19 +1146,19 @@
-	// Always use the locale codec, since we have no examples of non-local
-	// XIMs, and since we cannot get a sensible answer about the encoding
-	// from the XIM.
+ 	// Always use the locale codec, since we have no examples of non-local
+ 	// XIMs, and since we cannot get a sensible answer about the encoding
+ 	// from the XIM.
 -	input_mapper = QTextCodec::codecForLocale();
 +	qt_input_mapper = QTextCodec::codecForLocale();
-
+ 
      } else {
-	if ( !qstricmp( data, "locale" ) )
+ 	if ( !qstricmp( data, "locale" ) )
 -	    input_mapper = QTextCodec::codecForLocale();
 +	    qt_input_mapper = QTextCodec::codecForLocale();
-	else
+ 	else
 -	    input_mapper = QTextCodec::codecForName( data );
 +	    qt_input_mapper = QTextCodec::codecForName( data );
-	// make sure we have an input codec
+ 	// make sure we have an input codec
 -	if( !input_mapper )
 -	    input_mapper = QTextCodec::codecForName( "ISO 8859-1" );
 +	if( !qt_input_mapper )
@@ -16425,59 +16392,59 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    if ( qt_input_mapper->mibEnum() == 11 ) // 8859-8
 +	qt_input_mapper = QTextCodec::codecForName( "ISO 8859-8-I");
      if( data )
-	XFree( (char *)data );
+ 	XFree( (char *)data );
  }
 @@ -1529,6 +1596,8 @@
-
+ 
  #define XK_MISCELLANY
  #define XK_LATIN1
 +#define XK_KOREAN
 +#define XK_XKB_KEYS
  #include <X11/keysymdef.h>
-
+ 
  // ### This should be static but it isn't because of the friend declaration
 @@ -1619,10 +1688,7 @@
-		//Ming-Che 10/10
-	    } else if ( arg == "-im" ) {
-		if ( ++i < argc )
+ 		//Ming-Che 10/10
+ 	    } else if ( arg == "-im" ) {
+ 		if ( ++i < argc )
 -		    ximServer = argv[i];
 -	    } else if ( arg == "-noxim" ) {
 -		noxim=TRUE;
 -		//
 +		    qt_ximServer = argv[i];
-	    } else if ( arg == "-iconic" ) {
-		mwIconic = !mwIconic;
-	    } else if ( arg == "-ncols" ) {   // xv and netscape use this name
+ 	    } else if ( arg == "-iconic" ) {
+ 		mwIconic = !mwIconic;
+ 	    } else if ( arg == "-ncols" ) {   // xv and netscape use this name
 @@ -1642,17 +1708,17 @@
-		if ( ++i < argc ) {
-		    QCString s = QCString(argv[i]).lower();
-		    if ( s == "onthespot" )
+ 		if ( ++i < argc ) {
+ 		    QCString s = QCString(argv[i]).lower();
+ 		    if ( s == "onthespot" )
 -			xim_preferred_style = XIMPreeditCallbacks |
 -					      XIMStatusNothing;
 +			qt_xim_preferred_style = XIMPreeditCallbacks |
 +						 XIMStatusNothing;
-		    else if ( s == "overthespot" )
+ 		    else if ( s == "overthespot" )
 -			xim_preferred_style = XIMPreeditPosition |
 -					      XIMStatusNothing;
 +			qt_xim_preferred_style = XIMPreeditPosition |
 +						 XIMStatusNothing;
-		    else if ( s == "offthespot" )
+ 		    else if ( s == "offthespot" )
 -			xim_preferred_style = XIMPreeditArea |
 -					      XIMStatusArea;
 +			qt_xim_preferred_style = XIMPreeditArea |
 +						 XIMStatusArea;
-		    else if ( s == "root" )
+ 		    else if ( s == "root" )
 -			xim_preferred_style = XIMPreeditNothing |
 -					      XIMStatusNothing;
 +			qt_xim_preferred_style = XIMPreeditNothing |
 +						 XIMStatusNothing;
-		}
+ 		}
  #endif
-	    } else if ( arg == "-cmap" ) {    // xv uses this name
+ 	    } else if ( arg == "-cmap" ) {    // xv uses this name
 @@ -2100,34 +2166,13 @@
-	    QApplication::setFont( f );
-	}
-
+ 	    QApplication::setFont( f );
+ 	}
+ 
 -#ifndef QT_NO_XIM
 -	if ( ! xim_preferred_style ) // no configured input style, use the default
 -	    xim_preferred_style = xim_default_style;
@@ -16513,13 +16480,13 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    QApplication::create_xim();
 +#endif
 +#endif
-
+ 
  #if defined (QT_TABLET_SUPPORT)
-	int ndev,
+ 	int ndev,
 @@ -2376,9 +2421,12 @@
-	XCloseDevice( appDpy, devEraser );
+ 	XCloseDevice( appDpy, devEraser );
  #endif
-
+ 
 -#if !defined(QT_NO_XIM)
 -    if ( qt_xim )
 -	QApplication::close_xim();
@@ -16530,12 +16497,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    QApplication::close_xim();
 +#endif
  #endif
-
+ 
      if ( qt_is_gui_used ) {
 @@ -3237,77 +3285,59 @@
-	}
+ 	}
      }
-
+ 
 -    int xkey_keycode = event->xkey.keycode;
 -    if ( XFilterEvent( event,
 -		       keywidget ? keywidget->topLevelWidget()->winId() : None ) ) {
@@ -16553,7 +16520,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +    // accelerators and so on, so we must give the input context the
 +    // filtering opportunity first to ensure all input methods work
 +    // properly regardless of application design.
-
+ 
 -	/*
 -	 * The Solaris htt input method will transform a ClientMessage
 -	 * event into a filtered KeyPress event, in which case our
@@ -16582,7 +16549,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	if( ( event->type==XKeyPress || event->type==XKeyRelease ) &&
 +	    sm_blockUserInput ) // block user interaction during session management
 +	    return TRUE;
-
+ 
 -	/*
 -	  if the composition string has been emptied, we need to send
 -	  an IMEnd event.  however, we have no way to tell if the user
@@ -16592,7 +16559,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	QInputContext *qic = keywidget->getInputContext();
 +	if( qic && qic->x11FilterEvent( keywidget, event ) )
 +	    return TRUE;
-
+ 
 -	  so, we have to look for the next keypress and see if it is
 -	  the 'commit' key press (keycode == 0).  if it is, we deliver
 -	  an IMEnd event with the final text, otherwise we deliver an
@@ -16626,7 +16593,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	    char ascii = 0;
 +	    QEvent::Type type;
 +	    QString text;
-
+ 
 -	    if ( !found ) {
 -		// no key event, so the user must have cancelled the composition
 -		QIMEvent endevent( QEvent::IMEnd, QString::null, -1 );
@@ -16634,17 +16601,17 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	    keywidget->translateKeyEventInternal( event, count, text,
 +						  state, ascii, code, type,
 +						  FALSE, FALSE );
-
+ 
 -		qic->focusWidget = 0;
 -	    }
 +	    // both key press/release is required for some complex
 +	    // input methods. don't eliminate anything.
 +	    QKeyEvent keyevent( type, code, ascii, state, text, FALSE, count );
-
+ 
 -	    qt_compose_emptied = FALSE;
 +	    if( qic && qic->filterEvent( &keyevent ) )
 +		return TRUE;
-	}
+ 	}
 -#endif // QT_NO_XIM
 -
 -	return 1;
@@ -16654,12 +16621,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	if ( XFilterEvent( event, None ) )
 +	    return TRUE;
      }
-
+ 
      if ( qt_x11EventFilter(event) )		// send through app filter
 @@ -3458,34 +3488,8 @@
      case XKeyRelease:
-	{
-	    if ( keywidget && keywidget->isEnabled() ) { // should always exist
+ 	{
+ 	    if ( keywidget && keywidget->isEnabled() ) { // should always exist
 -#ifndef QT_NO_XIM
 -		QInputContext *qic =
 -		    (QInputContext *) keywidget->topLevelWidget()->topData()->xic;
@@ -16690,13 +16657,13 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 -		    }
 +	        // qDebug( "sending key event" );
 +	        keywidget->translateKeyEvent( event, grabbed );
-	    }
-	    break;
-	}
+ 	    }
+ 	    break;
+ 	}
 @@ -4780,6 +4784,92 @@
      0x1005FF10,         Qt::Key_F11,         // hardcoded Sun F36 (labeled F11)
      0x1005FF11,         Qt::Key_F12,         // hardcoded Sun F37 (labeled F12)
-
+ 
 +    // International input method support keys
 +
 +    // International & multi-key character composition
@@ -16785,11 +16752,11 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +
      // Special multimedia keys
      // currently only tested with MS internet keyboard
-
+ 
 @@ -4997,9 +5087,9 @@
  bool QETWidget::translateKeyEventInternal( const XEvent *event, int& count,
-					   QString& text,
-					   int& state,
+ 					   QString& text,
+ 					   int& state,
 -					   char& ascii, int& code, QEvent::Type &type, bool willRepeat )
 +					   char& ascii, int& code, QEvent::Type &type, bool willRepeat, bool statefulTranslation )
  {
@@ -16799,69 +16766,69 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
      // so we increase the input buffer to allow for long strings...
      // 256 chars * 2 bytes + 1 null-term == 513 bytes
 @@ -5046,6 +5136,11 @@
-
+ 
      if ( type == QEvent::KeyPress ) {
-	bool mb=FALSE;
+ 	bool mb=FALSE;
 +	// commit string handling is done by
 +	// QXIMInputContext::x11FilterEvent() and are passed to
 +	// widgets via QIMEvent regardless of XIM style, so the
 +	// following code is commented out.
 +#if 0
-	if ( qt_xim ) {
-	    QTLWExtra*  xd = tlw->topData();
-	    QInputContext *qic = (QInputContext *) xd->xic;
+ 	if ( qt_xim ) {
+ 	    QTLWExtra*  xd = tlw->topData();
+ 	    QInputContext *qic = (QInputContext *) xd->xic;
 @@ -5054,13 +5149,14 @@
-		count = qic->lookupString(&xkeyevent, chars, &key, &status);
-	    }
-	}
+ 		count = qic->lookupString(&xkeyevent, chars, &key, &status);
+ 	    }
+ 	}
 +#endif
-	if ( !mb ) {
-	    count = XLookupString( &xkeyevent,
-				   chars.data(), chars.size(), &key, 0 );
-	}
-	if ( count && !keycode ) {
+ 	if ( !mb ) {
+ 	    count = XLookupString( &xkeyevent,
+ 				   chars.data(), chars.size(), &key, 0 );
+ 	}
+ 	if ( count && !keycode ) {
 -	    keycode = composingKeycode;
 -	    composingKeycode = 0;
 +	    keycode = qt_ximComposingKeycode;
 +	    qt_ximComposingKeycode = 0;
-	}
-	if ( key )
-	    keyDict->replace( keycode, (void*)key );
+ 	}
+ 	if ( key )
+ 	    keyDict->replace( keycode, (void*)key );
 @@ -5124,11 +5220,12 @@
      } else {
-	key = (int)(long)keyDict->find( keycode );
-	if ( key )
+ 	key = (int)(long)keyDict->find( keycode );
+ 	if ( key )
 -	    if( !willRepeat ) // Take out key of dictionary only if this call.
 +	    if( !willRepeat && statefulTranslation ) // Take out key of dictionary only if this call.
-		keyDict->take( keycode );
-	long s = (long)textDict->find( keycode );
-	if ( s ) {
+ 		keyDict->take( keycode );
+ 	long s = (long)textDict->find( keycode );
+ 	if ( s ) {
 -	    textDict->take( keycode );
 +	    if ( statefulTranslation )
 +	        textDict->take( keycode );
-	    ascii = (char)(s-256);
-	}
+ 	    ascii = (char)(s-256);
+ 	}
      }
 @@ -5137,15 +5234,18 @@
      state = translateButtonState( keystate );
-
+ 
      static int directionKeyEvent = 0;
 -    if ( qt_use_rtl_extensions && type == QEvent::KeyRelease ) {
 +    static unsigned int lastWinId = 0;
 +    if ( qt_use_rtl_extensions && type == QEvent::KeyRelease && statefulTranslation ) {
-	if (directionKeyEvent == Key_Direction_R || directionKeyEvent == Key_Direction_L ) {
-	    type = QEvent::KeyPress;
-	    code = directionKeyEvent;
-	    chars[0] = 0;
-	    directionKeyEvent = 0;
+ 	if (directionKeyEvent == Key_Direction_R || directionKeyEvent == Key_Direction_L ) {
+ 	    type = QEvent::KeyPress;
+ 	    code = directionKeyEvent;
+ 	    chars[0] = 0;
+ 	    directionKeyEvent = 0;
 +	    lastWinId = 0;
-	    return TRUE;
-	} else {
-	    directionKeyEvent = 0;
+ 	    return TRUE;
+ 	} else {
+ 	    directionKeyEvent = 0;
 +	    lastWinId = 0;
-	}
+ 	}
      }
-
+ 
 @@ -5155,10 +5255,14 @@
      // (to figure out whether the Ctrl modifier is held while Shift is pressed,
      // or Shift is held while Ctrl is pressed) since the 'state' doesn't tell
@@ -16871,38 +16838,38 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
          if (key == XK_Control_L || key == XK_Control_R || key == XK_Shift_L || key == XK_Shift_R) {
 -           if (!directionKeyEvent)
 +	    if (!directionKeyEvent) {
-	      directionKeyEvent = key;
-+	      // This code exists in order to check that
+ 	      directionKeyEvent = key;
++	      // This code exists in order to check that 
 +	      // the event is occurred in the same widget.
 +	      lastWinId = winId();
 +	    }
          } else {
             // this can no longer be a direction-changing accel.
-	   // if any other key was pressed.
+ 	   // if any other key was pressed.
 @@ -5172,7 +5276,7 @@
      // Qt keycodes between 128 and 255, but should rather use the
      // QKeyEvent::text().
      //
 -    if ( key < 128 || (key < 256 && (!input_mapper || input_mapper->mibEnum()==4)) ) {
 +    if ( key < 128 || (key < 256 && (!qt_input_mapper || qt_input_mapper->mibEnum()==4)) ) {
-	code = isprint((int)key) ? toupper((int)key) : 0; // upper-case key, if known
+ 	code = isprint((int)key) ? toupper((int)key) : 0; // upper-case key, if known
      } else if ( key >= XK_F1 && key <= XK_F35 ) {
-	code = Key_F1 + ((int)key - XK_F1);	// function keys
+ 	code = Key_F1 + ((int)key - XK_F1);	// function keys
 @@ -5223,8 +5327,8 @@
-	    chars[0] = 0;
-	}
-
+ 	    chars[0] = 0;
+ 	}
+ 
 -	if ( qt_use_rtl_extensions && type  == QEvent::KeyPress ) {
 -	    if ( directionKeyEvent ) {
 +	if ( qt_use_rtl_extensions && type  == QEvent::KeyPress && statefulTranslation ) {
 +	    if ( directionKeyEvent && lastWinId == winId() ) {
-		if ( key == XK_Shift_L && directionKeyEvent == XK_Control_L ||
-		     key == XK_Control_L && directionKeyEvent == XK_Shift_L ) {
-		    directionKeyEvent = Key_Direction_L;
+ 		if ( key == XK_Shift_L && directionKeyEvent == XK_Control_L ||
+ 		     key == XK_Control_L && directionKeyEvent == XK_Shift_L ) {
+ 		    directionKeyEvent = Key_Direction_L;
 @@ -5400,8 +5504,34 @@
-	translateKeyEventInternal( event, count, text, state, ascii, code, type );
+ 	translateKeyEventInternal( event, count, text, state, ascii, code, type );
      }
-
+ 
 +#ifndef QT_NO_IM
 +    QInputContext *qic = getInputContext();
 +#endif
@@ -16931,11 +16898,11 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	 // feature.
 +	 ! qic &&
 +#endif // QT_NO_IM
-	 // do not compress keys if the key event we just got above matches
-	 // one of the key ranges used to compute stopCompression
-	 ! ( ( code >= Key_Escape && code <= Key_SysReq ) ||
+ 	 // do not compress keys if the key event we just got above matches
+ 	 // one of the key ranges used to compute stopCompression
+ 	 ! ( ( code >= Key_Escape && code <= Key_SysReq ) ||
 @@ -5460,7 +5590,12 @@
-
+ 
      // autorepeat compression makes sense for all widgets (Windows
      // does it automatically .... )
 -    if ( event->type == XKeyPress && text.length() <= 1 ) {
@@ -16945,8 +16912,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qapplication_x11.cpp qt-x11-free-3.
 +	 && ! qic
 +#endif// QT_NO_IM
 +	 ) {
-	XEvent dummy;
-
+ 	XEvent dummy;
+ 
          for (;;) {
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qevent.cpp qt-x11-free-3.3.8/src/kernel/qevent.cpp
 --- qt-x11-free-3.3.8.orig/src/kernel/qevent.cpp	2007-03-20 22:11:17.000000000 +0900
@@ -16954,14 +16921,14 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qevent.cpp qt-x11-free-3.3.8/src/ke
 @@ -732,6 +732,10 @@
      the result of a known key (e.g. it may be the result of a compose
      sequence or a keyboard macro, or due to key event compression).
-
+ 
 +    Applications should not use the Qt latin 1 keycodes between 128
 +    and 255, but should rather use the QKeyEvent::text(). This is
 +    mainly for compatibility.
 +
      \sa QWidget::setKeyCompression()
  */
-
+ 
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext.cpp qt-x11-free-3.3.8/src/kernel/qinputcontext.cpp
 --- qt-x11-free-3.3.8.orig/src/kernel/qinputcontext.cpp	1970-01-01 09:00:00.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qinputcontext.cpp	2007-03-20 23:18:42.000000000 +0900
@@ -17021,7 +16988,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext.cpp qt-x11-free-3.3.8
 +public:
 +    QInputContextPrivate()
 +	: holderWidget( 0 ), composingWidget( 0 ), hasFocus( FALSE ),
-+	  isComposing( FALSE )
++	  isComposing( FALSE ) 
 +#if !defined(QT_NO_IM_PREEDIT_RELOCATION)
 +	  , preeditString( QString::null ),
 +	  cursorPosition( -1 ), selLength ( 0 )
@@ -17467,7 +17434,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext.cpp qt-x11-free-3.3.8
 +
 +    \a receiver is a platform dependent destination of the \a e.
 +
-+    \sa QIMEvent, sendIMEvent(), sendIMEventInternal(),
++    \sa QIMEvent, sendIMEvent(), sendIMEventInternal(), 
 +*/
 +
 +/*!
@@ -17931,7 +17898,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext.h qt-x11-free-3.3.8/s
 +#endif
 +
 +#if defined(Q_WS_X11)
-+    // these functions are not recommended for ordinary use
++    // these functions are not recommended for ordinary use 
 +    virtual QWidget *focusWidget() const;
 +    virtual QWidget *holderWidget() const;
 +
@@ -17975,48 +17942,48 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext_x11.cpp qt-x11-free-3
 @@ -33,500 +33,38 @@
  **
  **********************************************************************/
-
+ 
 +#include "qinputcontext.h"
 +
 +#ifndef QT_NO_IM
 +
  #include "qplatformdefs.h"
-
+ 
  #include "qapplication.h"
  #include "qwidget.h"
 -#include "qinputcontext_p.h"
 -
 -#include <stdlib.h>
 -#include <limits.h>
-
+ 
 +#include "qt_x11_p.h"
-
+ 
 -bool qt_compose_emptied = FALSE;
 -
 -#if !defined(QT_NO_XIM)
 +/*!
 +    This function may be overridden only if input method is depending
 +    on X11 and you need raw XEvent. Otherwise, this function must not.
-
+ 
 -#define XK_MISCELLANY
 -#define XK_LATIN1
 -#include <X11/keysymdef.h>
 +    This function is designed to filter raw key events for XIM, but
 +    other input methods may use this to implement some special
 +    features such as distinguishing Shift_L and Shift_R.
-
+ 
 -// #define QT_XIM_DEBUG
 +    Return TRUE if the \a event has been consumed. Otherwise, the
 +    unfiltered \a event will be translated into QEvent and forwarded
 +    to filterEvent(). Filtering at both x11FilterEvent() and
 +    filterEvent() in single input method is allowed.
-
+ 
 -// from qapplication_x11.cpp
 -extern XIM	qt_xim;
 -extern XIMStyle	qt_xim_style;
 +    \a keywidget is a client widget into which a text is inputted. \a
 +    event is inputted XEvent.
-
+ 
 -/* The cache here is needed, as X11 leaks a few kb for every
 -   XFreeFontSet call, so we avoid creating and deletion of fontsets as
 -   much as possible
@@ -18475,7 +18442,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qinputcontext_x11.cpp qt-x11-free-3
 -#endif // !QT_NO_XIM
 +    return FALSE;
  }
-
+ 
 -void QInputContext::setXFontSet(const QFont &f)
 -{
 -#if !defined(QT_NO_XIM)
@@ -18498,14 +18465,14 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qnamespace.h qt-x11-free-3.3.8/src/
 --- qt-x11-free-3.3.8.orig/src/kernel/qnamespace.h	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qnamespace.h	2007-03-20 23:18:42.000000000 +0900
 @@ -397,6 +397,87 @@
-	Key_Help = 0x1058,
-	Key_Direction_L = 0x1059,
-	Key_Direction_R = 0x1060,
+ 	Key_Help = 0x1058,
+ 	Key_Direction_L = 0x1059,
+ 	Key_Direction_R = 0x1060,
 +
 +	// International input method support (X keycode - 0xEE00, the
 +	// definition follows Qt/Embedded 2.3.7) Only interesting if
 +	// you are writing your own input method
-+
++        
 +	// International & multi-key character composition
 +	Key_Multi_key           = 0x1120,  // Multi-key character compose
 +	Key_Codeinput           = 0x1137,
@@ -18582,45 +18549,45 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qnamespace.h qt-x11-free-3.3.8/src/
 +        Key_Dead_Hook           = 0x1261,
 +        Key_Dead_Horn           = 0x1262,
 +
-	Key_Space = 0x20,		// 7 bit printable ASCII
-	Key_Any = Key_Space,
-	Key_Exclam = 0x21,
+ 	Key_Space = 0x20,		// 7 bit printable ASCII
+ 	Key_Any = Key_Space,
+ 	Key_Exclam = 0x21,
 @@ -469,6 +550,11 @@
-	Key_AsciiTilde = 0x7e,
-
-	// Latin 1 codes adapted from X: keysymdef.h,v 1.21 94/08/28 16:17:06
+ 	Key_AsciiTilde = 0x7e,
+ 
+ 	// Latin 1 codes adapted from X: keysymdef.h,v 1.21 94/08/28 16:17:06
 +	//
 +	// This is mainly for compatibility - applications and input
 +	// methods should not use the Qt keycodes between 128 and 255,
 +	// but should rather use the QKeyEvent::text(). See
 +	// QETWidget::translateKeyEventInternal() for more details.
-
-	Key_nobreakspace = 0x0a0,
-	Key_exclamdown = 0x0a1,
+ 
+ 	Key_nobreakspace = 0x0a0,
+ 	Key_exclamdown = 0x0a1,
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qrichtext.cpp qt-x11-free-3.3.8/src/kernel/qrichtext.cpp
 --- qt-x11-free-3.3.8.orig/src/kernel/qrichtext.cpp	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qrichtext.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -662,7 +662,7 @@
-	pop();
+ 	pop();
  }
-
+ 
 -bool QTextCursor::place( const QPoint &p, QTextParagraph *s, bool link )
 +bool QTextCursor::place( const QPoint &p, QTextParagraph *s, bool link, bool loosePlacing, bool matchBetweenCharacters )
  {
      QPoint pos( p );
      QRect r;
 @@ -680,7 +680,7 @@
-	    str = s;
-	if ( pos.y() >= r.y() && pos.y() <= r.y() + r.height() )
-	    break;
+ 	    str = s;
+ 	if ( pos.y() >= r.y() && pos.y() <= r.y() + r.height() )
+ 	    break;
 -	if ( !s->next() ) {
 +	if ( loosePlacing == TRUE && !s->next() ) {
  #ifdef Q_WS_MACX
-	    pos.setX( s->rect().x() + s->rect().width() );
+ 	    pos.setX( s->rect().x() + s->rect().width() );
  #endif
 @@ -721,7 +721,7 @@
      if ( pos.x() < x )
-	pos.setX( x + 1 );
+ 	pos.setX( x + 1 );
      int cw;
 -    int curpos = s->length()-1;
 +    int curpos = -1;
@@ -18628,19 +18595,19 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qrichtext.cpp qt-x11-free-3.3.8/src
      bool inCustom = FALSE;
      while ( i < nextLine ) {
 @@ -743,14 +743,21 @@
-		cpos += cw;
-	    int d = cpos - pos.x();
-	    bool dm = d < 0 ? !chr->rightToLeft : chr->rightToLeft;
+ 		cpos += cw;
+ 	    int d = cpos - pos.x();
+ 	    bool dm = d < 0 ? !chr->rightToLeft : chr->rightToLeft;
 -	    if ( (QABS( d ) < dist || (dist == d && dm == TRUE )) && para->string()->validCursorPosition( i ) ) {
 +	    if ( ( matchBetweenCharacters == TRUE && (QABS( d ) < dist || (dist == d && dm == TRUE )) && para->string()->validCursorPosition( i ) ) ||
 +		 ( matchBetweenCharacters == FALSE && ( d == 0 || dm == TRUE ) ) ) {
-		dist = QABS( d );
+ 		dist = QABS( d );
 -		if ( !link || pos.x() >= x + chr->x )
 +		if ( !link || ( pos.x() >= x + chr->x && ( loosePlacing == TRUE || pos.x() < cpos ) ) )
-		    curpos = i;
-	    }
-	}
-	i++;
+ 		    curpos = i;
+ 	    }
+ 	}
+ 	i++;
      }
 +    if ( curpos == -1 ) {
 +	if ( loosePlacing == TRUE )
@@ -18649,70 +18616,70 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qrichtext.cpp qt-x11-free-3.3.8/src
 +	    return FALSE;
 +    }
      setIndex( curpos );
-
+ 
  #ifndef QT_NO_TEXTCUSTOMITEM
 @@ -4876,6 +4883,9 @@
-		    tmpw = fullSelectionWidth - xleft;
-		painter.fillRect( xleft, y, tmpw, h, color );
-		painter.drawText( xstart, y + baseLine, str, start, len, dir );
+ 		    tmpw = fullSelectionWidth - xleft;
+ 		painter.fillRect( xleft, y, tmpw, h, color );
+ 		painter.drawText( xstart, y + baseLine, str, start, len, dir );
 +                // draw preedit's underline
 +                if (selection == QTextDocument::IMCompositionText)
 +                    painter.drawLine(xstart, y + baseLine + 1, xstart + w, y + baseLine + 1);
-		if (selStart != start || selEnd != start + len || selWrap)
-		    painter.restore();
-	    }
+ 		if (selStart != start || selEnd != start + len || selWrap)
+ 		    painter.restore();
+ 	    }
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qrichtext_p.h qt-x11-free-3.3.8/src/kernel/qrichtext_p.h
 --- qt-x11-free-3.3.8.orig/src/kernel/qrichtext_p.h	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qrichtext_p.h	2007-03-20 23:18:42.000000000 +0900
 @@ -362,7 +362,8 @@
      int totalOffsetY() const; // total document offset
-
+ 
      bool place( const QPoint &pos, QTextParagraph *s ) { return place( pos, s, FALSE ); }
 -    bool place( const QPoint &pos, QTextParagraph *s, bool link );
 +    bool place( const QPoint &pos, QTextParagraph *s, bool link ) { return place( pos, s, link, TRUE, TRUE ); }
 +    bool place( const QPoint &pos, QTextParagraph *s, bool link, bool loosePlacing, bool matchBetweenCharacters );
      void restoreState();
-
-
+ 
+ 
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qt_kernel.pri qt-x11-free-3.3.8/src/kernel/qt_kernel.pri
 --- qt-x11-free-3.3.8.orig/src/kernel/qt_kernel.pri	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qt_kernel.pri	2007-03-20 23:18:42.000000000 +0900
 @@ -34,7 +34,6 @@
-		  $$KERNEL_H/qimage.h \
-		  $$KERNEL_P/qimageformatinterface_p.h \
-		  $$KERNEL_H/qimageformatplugin.h \
+ 		  $$KERNEL_H/qimage.h \
+ 		  $$KERNEL_P/qimageformatinterface_p.h \
+ 		  $$KERNEL_H/qimageformatplugin.h \
 -		  $$KERNEL_P/qinputcontext_p.h \
-		  $$KERNEL_H/qkeycode.h \
-		  $$KERNEL_H/qkeysequence.h \
-		  $$KERNEL_H/qlayout.h \
+ 		  $$KERNEL_H/qkeycode.h \
+ 		  $$KERNEL_H/qkeysequence.h \
+ 		  $$KERNEL_H/qlayout.h \
 @@ -99,6 +98,12 @@
-		  $$KERNEL_CPP/qfontengine_p.h \
-		  $$KERNEL_CPP/qtextlayout_p.h
-
+ 		  $$KERNEL_CPP/qfontengine_p.h \
+ 		  $$KERNEL_CPP/qtextlayout_p.h
+ 
 +	unix:x11 {
 +		HEADERS += $$KERNEL_H/qinputcontext.h
 +	} else {
 +		HEADERS += $$KERNEL_P/qinputcontext_p.h
 +	}
 +
-	win32:SOURCES += $$KERNEL_CPP/qapplication_win.cpp \
-		  $$KERNEL_CPP/qclipboard_win.cpp \
-		  $$KERNEL_CPP/qcolor_win.cpp \
+ 	win32:SOURCES += $$KERNEL_CPP/qapplication_win.cpp \
+ 		  $$KERNEL_CPP/qclipboard_win.cpp \
+ 		  $$KERNEL_CPP/qcolor_win.cpp \
 @@ -130,6 +135,7 @@
-			  $$KERNEL_CPP/qdesktopwidget_x11.cpp \
-			  $$KERNEL_CPP/qeventloop_x11.cpp \
-			  $$KERNEL_CPP/qfont_x11.cpp \
+ 			  $$KERNEL_CPP/qdesktopwidget_x11.cpp \
+ 			  $$KERNEL_CPP/qeventloop_x11.cpp \
+ 			  $$KERNEL_CPP/qfont_x11.cpp \
 +			  $$KERNEL_CPP/qinputcontext.cpp \
-			  $$KERNEL_CPP/qinputcontext_x11.cpp \
-			  $$KERNEL_CPP/qmotifdnd_x11.cpp \
-			  $$KERNEL_CPP/qpixmap_x11.cpp \
+ 			  $$KERNEL_CPP/qinputcontext_x11.cpp \
+ 			  $$KERNEL_CPP/qmotifdnd_x11.cpp \
+ 			  $$KERNEL_CPP/qpixmap_x11.cpp \
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget.cpp qt-x11-free-3.3.8/src/kernel/qwidget.cpp
 --- qt-x11-free-3.3.8.orig/src/kernel/qwidget.cpp	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qwidget.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -3282,8 +3282,24 @@
      if ( isActiveWindow() ) {
-	QWidget * prev = qApp->focus_widget;
-	if ( prev ) {
+ 	QWidget * prev = qApp->focus_widget;
+ 	if ( prev ) {
 -	    if ( prev != this )
 +	    // This part is never executed when Q_WS_X11? Preceding XFocusOut
 +	    // had already reset focus_widget when received XFocusIn
@@ -18727,59 +18694,59 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget.cpp qt-x11-free-3.3.8/src/k
 +	    // unfocusInputContext().
 +	    if ( prev != this && prev->isInputMethodEnabled() ) {
 +#if 0
-		prev->resetInputContext();
+ 		prev->resetInputContext();
 +#else
 +		prev->unfocusInputContext();
 +#endif
 +	    }
-	}
+ 	}
  #if defined(Q_WS_WIN)
-	else {
+ 	else {
 @@ -3291,9 +3307,8 @@
-	}
+ 	}
  #endif
-	qApp->focus_widget = this;
+ 	qApp->focus_widget = this;
 -#if defined(Q_WS_X11)
 -	focusInputContext();
 -#endif
 +	if( isInputMethodEnabled() )
 +	    focusInputContext();
-
+ 
  #if defined(Q_WS_WIN)
-	if ( !topLevelWidget()->isPopup() )
+ 	if ( !topLevelWidget()->isPopup() )
 @@ -3341,7 +3356,11 @@
-	focusProxy()->clearFocus();
-	return;
+ 	focusProxy()->clearFocus();
+ 	return;
      } else if ( hasFocus() ) {
 +#if !defined(Q_WS_X11)
          resetInputContext();
 +#else
 +	unfocusInputContext();
 +#endif
-	QWidget* w = qApp->focusWidget();
-	// clear active focus
-	qApp->focus_widget = 0;
+ 	QWidget* w = qApp->focusWidget();
+ 	// clear active focus
+ 	qApp->focus_widget = 0;
 @@ -4667,7 +4686,13 @@
-	    break;
-
-	case QEvent::MouseButtonPress:
+ 	    break;
+ 
+ 	case QEvent::MouseButtonPress:
 +	    // Don't reset input context here. Whether reset or not is
 +	    // a responsibility of input method. reset() will be
 +	    // called by mouseHandler() of input method if necessary
 +	    // via mousePressEvent() of text widgets.
 +#if 0
-	    resetInputContext();
+ 	    resetInputContext();
 +#endif
-	    mousePressEvent( (QMouseEvent*)e );
-	    if ( ! ((QMouseEvent*)e)->isAccepted() )
-		return FALSE;
+ 	    mousePressEvent( (QMouseEvent*)e );
+ 	    if ( ! ((QMouseEvent*)e)->isAccepted() )
+ 		return FALSE;
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget.h qt-x11-free-3.3.8/src/kernel/qwidget.h
 --- qt-x11-free-3.3.8.orig/src/kernel/qwidget.h	2007-03-20 22:11:17.000000000 +0900
 +++ qt-x11-free-3.3.8/src/kernel/qwidget.h	2007-03-20 23:18:42.000000000 +0900
 @@ -49,6 +49,10 @@
  #include "qsizepolicy.h"
  #endif // QT_H
-
+ 
 +#if defined(Q_WS_X11) && !defined(QT_NO_IM)
 +class QInputContext;
 +#endif
@@ -18788,9 +18755,9 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget.h qt-x11-free-3.3.8/src/ker
  struct QWExtra;
  struct QTLWExtra;
 @@ -535,6 +539,18 @@
-
+ 
      int		 metric( int )	const;
-
+ 
 +#if defined(Q_WS_X11)
 +#if !defined(QT_NO_IM_EXTENSIONS)
 +    virtual QWidget *icHolderWidget();
@@ -18804,16 +18771,16 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget.h qt-x11-free-3.3.8/src/ker
 +					       Qt::ButtonState state );
 +#endif
      void	 resetInputContext();
-
+ 
      virtual void create( WId = 0, bool initializeWindow = TRUE,
 @@ -566,13 +582,16 @@
-
+ 
  private slots:
      void	 focusProxyDestroyed();
 +#if defined(Q_WS_X11)
 +    void	 destroyInputContext();
 +#endif
-
+ 
  private:
      void	 setFontSys( QFont *f = 0 );
  #if defined(Q_WS_X11)
@@ -18851,7 +18818,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 @@ -61,11 +61,9 @@
  bool qt_wstate_iconified( WId );
  void qt_updated_rootinfo();
-
+ 
 -#ifndef QT_NO_XIM
 -#include "qinputcontext_p.h"
 -
@@ -18861,23 +18828,23 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +#include "qinputcontext.h"
 +#include "qinputcontextfactory.h"
  #endif
-
+ 
  // Paint event clipping magic
 @@ -688,6 +686,10 @@
-
+ 
      if ( destroyw )
-	qt_XDestroyWindow( this, dpy, destroyw );
+ 	qt_XDestroyWindow( this, dpy, destroyw );
 +
 +#if !defined(QT_NO_IM_EXTENSIONS)
 +    ic = 0;
 +#endif
  }
-
-
+ 
+ 
 @@ -751,6 +753,16 @@
-	extern void qPRCleanup( QWidget *widget ); // from qapplication_x11.cpp
-	if ( testWState(WState_Reparented) )
-	    qPRCleanup(this);
+ 	extern void qPRCleanup( QWidget *widget ); // from qapplication_x11.cpp
+ 	if ( testWState(WState_Reparented) )
+ 	    qPRCleanup(this);
 +
 +	if( this == icHolderWidget() ) {
 +	    destroyInputContext();
@@ -18890,11 +18857,11 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +	}
      }
  }
-
+ 
 @@ -787,11 +799,11 @@
      XReparentWindow( x11Display(), old_winid,
-		     RootWindow( x11Display(), x11Screen() ), 0, 0 );
-
+ 		     RootWindow( x11Display(), x11Screen() ), 0, 0 );
+ 
 -    if ( isTopLevel() ) {
 -        // input contexts are associated with toplevel widgets, so we need
 -        // destroy the context here.  if we are reparenting back to toplevel,
@@ -18907,20 +18874,20 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +	// will use our new ic holder's context
          destroyInputContext();
      }
-
+ 
 @@ -947,7 +959,8 @@
      language input systems.
-
+ 
      In the X11 version of Qt, if \a text is TRUE, this method sets the
 -    XIM "spot" point for complex language input handling.
 +    input method focus point in the preedit (XIM "spot" point) for
 +    complex language input handling.
-
+ 
      The font \a f is a rendering hint to the currently active input method.
      If \a f is 0 the widget's font is used.
 @@ -957,22 +970,15 @@
  void QWidget::setMicroFocusHint(int x, int y, int width, int height,
-				bool text, QFont *f )
+ 				bool text, QFont *f )
  {
 -#ifndef QT_NO_XIM
 +#ifndef QT_NO_IM
@@ -18928,10 +18895,10 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 -	QWidget* tlw = topLevelWidget();
 -	QTLWExtra *topdata = tlw->topData();
 -
-	// trigger input context creation if it hasn't happened already
-	createInputContext();
+ 	// trigger input context creation if it hasn't happened already
+ 	createInputContext();
 -	QInputContext *qic = (QInputContext *) topdata->xic;
-
+ 
 -	if ( qt_xim && qic ) {
 -	    QPoint p( x, y );
 -	    QPoint p2 = mapTo( topLevelWidget(), QPoint( 0, 0 ) );
@@ -18943,19 +18910,19 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +	if(qic) {
 +	    QPoint gp = mapToGlobal( QPoint( x, y ) );
 +	    qic->setMicroFocus(gp.x(), gp.y(), width, height, f);
-	}
+ 	}
      }
  #endif
 @@ -1442,6 +1448,7 @@
      QWidget *tlw = topLevelWidget();
      if ( tlw->isVisible() && !tlw->topData()->embedded && !qt_deferred_map_contains(tlw) ) {
-	XSetInputFocus( x11Display(), tlw->winId(), RevertToNone, qt_x_time);
+ 	XSetInputFocus( x11Display(), tlw->winId(), RevertToNone, qt_x_time);
 +	// tlw->focusInputContext();
          focusInputContext();
      }
  }
 @@ -2422,13 +2429,16 @@
-
+ 
  void QWidget::createTLSysExtra()
  {
 +#if defined(QT_NO_IM_EXTENSIONS)
@@ -18963,19 +18930,19 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
      extra->topextra->xic = 0;
 +#endif
  }
-
+ 
  void QWidget::deleteTLSysExtra()
  {
 -    destroyInputContext();
 +    // don't destroy input context here. it will be destroyed in
 +    // QWidget::destroy() destroyInputContext();
  }
-
+ 
  /*
 @@ -2660,76 +2670,251 @@
  }
-
-
+ 
+ 
 +/*!
 +    This function returns the widget holding the QInputContext
 +    instance for this widget. The instance is used for text input to
@@ -19055,7 +19022,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +    This function is called to generate an input context
 +    according to a configuration for default input method
 +
-+    When QT_NO_IM_EXTENSIONS is not set, input context is
++    When QT_NO_IM_EXTENSIONS is not set, input context is 
 +    generated only when isInputMethodEnabled() returns TRUE.
 +*/
  void QWidget::createInputContext()
@@ -19066,7 +19033,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +    if( !isInputMethodEnabled() )
 +	return;
 +#endif
-
+ 
 -#ifndef QT_NO_XIM
 -    if (qt_xim) {
 -	if (! topdata->xic) {
@@ -19086,7 +19053,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +#else
 +    QInputContext **qicp = (QInputContext **)&icWidget->topData()->xic;
 +#endif
-+
++  
 +    if ( ! *qicp ) {
 +	// an input context of the default input method is generated.
 +	QInputContext *qic = QInputContextFactory::create( QApplication::defaultInputMethod(), icWidget );
@@ -19101,11 +19068,11 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +    }
 +#endif // QT_NO_IM
  }
-
-
+ 
+ 
 +/*!
 +    \internal
-+
++  
 +    This slot is used to destroy the input context that belonging
 +    to the widget itself, so icHolderWidget()->ic is not fetched.
 +
@@ -19134,8 +19101,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +    *qicp = 0;
 +#endif // QT_NO_IM
  }
-
-
+ 
+ 
  /*!
 -    This function is called when the user finishes input composition,
 -    e.g. changes focus to another widget, moves the cursor, etc.
@@ -19162,7 +19129,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +#ifndef QT_NO_IM
 +    // trigger input context creation if it hasn't happened already
 +    createInputContext();
-
+ 
 -	// trigger input context creation if it hasn't happened already
 -	createInputContext();
 +    QInputContext *qic = getInputContext();
@@ -19170,7 +19137,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +	qic->reset();
 +#endif // QT_NO_IM
 +}
-
+ 
 -	if (topdata->xic) {
 -	    QInputContext *qic = (QInputContext *) topdata->xic;
 -	    qic->reset();
@@ -19178,7 +19145,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +/*!
 +    \internal
 +    This is an internal function, you should never call this.
-+
++  
 +    This function is called to focus associated input context. The
 +    code intends to eliminate duplicate focus for the context even if
 +    the context is shared between widgets
@@ -19196,13 +19163,13 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +	if( qic->focusWidget() != this ) {
 +	    qic->setFocusWidget( this );
 +	    qic->setFocus();
-	}
+ 	}
      }
 -#endif // QT_NO_XIM
 +#endif // QT_NO_IM
  }
-
-
+ 
+ 
 -void QWidget::focusInputContext()
 +/*!
 +    \internal
@@ -19222,7 +19189,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +#ifndef QT_NO_IM
 +    // trigger input context creation if it hasn't happened already
 +    createInputContext();
-
+ 
 -        // trigger input context creation if it hasn't happened already
 -        createInputContext();
 +    QInputContext *qic = getInputContext();
@@ -19233,8 +19200,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +    }
 +#endif // QT_NO_IM
 +}
-+
-
++  
+ 
 -        if (topdata->xic) {
 -            QInputContext *qic = (QInputContext *) topdata->xic;
 -            qic->setFocus();
@@ -19254,7 +19221,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 +#ifndef QT_NO_IM
 +    // trigger input context creation if it hasn't happened already
 +    createInputContext();
-+
++  
 +    QInputContext *qic = getInputContext();
 +    if ( qic ) {
 +	// may be causing reset() in some input methods
@@ -19263,8 +19230,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp qt-x11-free-3.3.8/s
 -#endif // QT_NO_XIM
 +#endif // QT_NO_IM
  }
-+
-
++  
+ 
  void QWidget::setWindowOpacity(double)
  {
 diff -duNr qt-x11-free-3.3.8.orig/src/kernel/qwidget_x11.cpp.flc qt-x11-free-3.3.8/src/kernel/qwidget_x11.cpp.flc
@@ -19299,33 +19266,33 @@ diff -duNr qt-x11-free-3.3.8.orig/src/qt.pro qt-x11-free-3.3.8/src/qt.pro
  STYLES_CPP	= styles
  EMBEDDED_CPP	= embedded
 @@ -54,6 +55,7 @@
-		TOOLS_H		= $$TOOLS_CPP
-		CODECS_H	= $$CODECS_CPP
-		WORKSPACE_H	= $$WORKSPACE_CPP
+ 		TOOLS_H		= $$TOOLS_CPP
+ 		CODECS_H	= $$CODECS_CPP
+ 		WORKSPACE_H	= $$WORKSPACE_CPP
 +                #INPUTMETHOD_H 	= $$INPUTMETHOD_CPP
-		XML_H		= $$XML_CPP
-		CANVAS_H	= $$CANVAS_CPP
-		STYLES_H	= $$STYLES_CPP
+ 		XML_H		= $$XML_CPP
+ 		CANVAS_H	= $$CANVAS_CPP
+ 		STYLES_H	= $$STYLES_CPP
 @@ -70,6 +72,7 @@
-		TOOLS_H		= $$WIN_ALL_H
-		CODECS_H	= $$WIN_ALL_H
-		WORKSPACE_H	= $$WIN_ALL_H
+ 		TOOLS_H		= $$WIN_ALL_H
+ 		CODECS_H	= $$WIN_ALL_H
+ 		WORKSPACE_H	= $$WIN_ALL_H
 +                #INPUTMETHOD_H 	= $$WIN_ALL_H
-		XML_H		= $$WIN_ALL_H
-		CANVAS_H	= $$WIN_ALL_H
-		STYLES_H	= $$WIN_ALL_H
+ 		XML_H		= $$WIN_ALL_H
+ 		CANVAS_H	= $$WIN_ALL_H
+ 		STYLES_H	= $$WIN_ALL_H
 @@ -98,6 +101,7 @@
-	TOOLS_H		= $$TOOLS_CPP
-	CODECS_H	= $$CODECS_CPP
-	WORKSPACE_H	= $$WORKSPACE_CPP
+ 	TOOLS_H		= $$TOOLS_CPP
+ 	CODECS_H	= $$CODECS_CPP
+ 	WORKSPACE_H	= $$WORKSPACE_CPP
 +        INPUTMETHOD_H 	= $$INPUTMETHOD_CPP
-	XML_H		= $$XML_CPP
-	STYLES_H	= $$STYLES_CPP
-	!embedded:!mac:CONFIG	   += x11 x11inc
+ 	XML_H		= $$XML_CPP
+ 	STYLES_H	= $$STYLES_CPP
+ 	!embedded:!mac:CONFIG	   += x11 x11inc
 @@ -112,7 +116,7 @@
-	EMBEDDED_H	= $$EMBEDDED_CPP
+ 	EMBEDDED_H	= $$EMBEDDED_CPP
  }
-
+ 
 -DEPENDPATH += ;$$NETWORK_H;$$KERNEL_H;$$WIDGETS_H;$$SQL_H;$$TABLE_H;$$DIALOGS_H;
 +DEPENDPATH += ;$$NETWORK_H;$$KERNEL_H;$$WIDGETS_H;$$INPUTMETHOD_H;$$SQL_H;$$TABLE_H;$$DIALOGS_H;
  DEPENDPATH += $$ICONVIEW_H;$$OPENGL_H;$$TOOLS_H;$$CODECS_H;$$WORKSPACE_H;$$XML_H;
@@ -19345,7 +19312,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/tools/qfeatures.h qt-x11-free-3.3.8/src/to
 @@ -982,3 +982,13 @@
  #define QT_NO_WORKSPACE
  #endif
-
+ 
 +// Input method
 +#if !defined(QT_NO_IM) && (defined(QT_NO_STRINGLIST))
 +#define QT_NO_IM
@@ -19360,7 +19327,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 --- qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp	2007-03-20 22:11:18.000000000 +0900
 +++ qt-x11-free-3.3.8/src/widgets/qlineedit.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -37,6 +37,12 @@
-
+ 
  #include "qlineedit.h"
  #ifndef QT_NO_LINEEDIT
 +
@@ -19373,14 +19340,14 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
  #include "qdrawutil.h"
  #include "qfontmetrics.h"
 @@ -245,12 +251,17 @@
-
+ 
      // input methods
      int imstart, imend, imselstart, imselend;
 +    bool composeMode() const { return preeditLength(); }
 +    bool hasIMSelection() const { return imSelectionLength(); }
 +    int preeditLength() const { return ( imend - imstart ); }
 +    int imSelectionLength() const { return ( imselend - imselstart ); }
-
+ 
      // complex text layout
      QTextLayout textLayout;
      void updateTextLayout();
@@ -19391,13 +19358,13 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
      inline int visualAlignment() const { return alignment ? alignment : int( isRightToLeft() ? AlignRight : AlignLeft ); }
      QRect cursorRect() const;
 @@ -588,6 +599,7 @@
-	return;
+ 	return;
      d->echoMode = mode;
      d->updateTextLayout();
 +    setInputMethodEnabled( mode == Normal );
      update();
  }
-
+ 
 @@ -1419,6 +1431,8 @@
  */
  void QLineEdit::mousePressEvent( QMouseEvent* e )
@@ -19405,7 +19372,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +    if ( sendMouseEventToInputContext( e ) )
 +	return;
      if ( e->button() == RightButton )
-	return;
+ 	return;
      if ( d->tripleClickTimer && ( e->pos() - d->tripleClick ).manhattanLength() <
 @@ -1448,7 +1462,8 @@
  */
@@ -19416,7 +19383,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +	return;
  #ifndef QT_NO_CURSOR
      if ( ( e->state() & MouseButtonMask ) == 0 ) {
-	if ( !d->readOnly && d->dragEnabled
+ 	if ( !d->readOnly && d->dragEnabled
 @@ -1477,6 +1492,8 @@
  */
  void QLineEdit::mouseReleaseEvent( QMouseEvent* e )
@@ -19425,7 +19392,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +	return;
  #ifndef QT_NO_DRAGANDDROP
      if ( e->button() == LeftButton ) {
-	if ( d->dndTimer ) {
+ 	if ( d->dndTimer ) {
 @@ -1503,6 +1520,8 @@
  */
  void QLineEdit::mouseDoubleClickEvent( QMouseEvent* e )
@@ -19433,12 +19400,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +    if ( sendMouseEventToInputContext( e ) )
 +	return;
      if ( e->button() == Qt::LeftButton ) {
-	deselect();
-	d->cursor = d->xToPos( e->pos().x() );
+ 	deselect();
+ 	d->cursor = d->xToPos( e->pos().x() );
 @@ -1772,6 +1791,33 @@
-	e->ignore();
+ 	e->ignore();
  }
-
+ 
 +
 +/*!
 +  This function is not intended as polymorphic usage. Just a shared code
@@ -19489,12 +19456,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 @@ -1832,6 +1887,8 @@
      }
      if( !hasSelectedText() || style().styleHint( QStyle::SH_BlinkCursorWhenTextSelected ) )
-	d->setCursorVisible( TRUE );
+ 	d->setCursorVisible( TRUE );
 +    if ( d->hasIMSelection() )
 +	d->cursor = d->imselstart;
      d->updateMicroFocusHint();
  }
-
+ 
 @@ -1916,6 +1973,14 @@
      } else if (d->hscroll < 0) {
          d->hscroll = 0;
@@ -19509,47 +19476,47 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +    d->updateMicroFocusHint();
      // the y offset is there to keep the baseline constant in case we have script changes in the text.
      QPoint topLeft = lineRect.topLeft() - QPoint(d->hscroll, d->ascent-fm.ascent());
-
+ 
 @@ -1956,7 +2021,7 @@
-	}
-
-	// input method edit area
+ 	}
+ 
+ 	// input method edit area
 -	if ( d->imstart < d->imend && (last >= d->imstart && first < d->imend ) ) {
 +	if ( d->composeMode() && (last >= d->imstart && first < d->imend ) ) {
-	    QRect highlight = QRect( QPoint( tix + ti.cursorToX( QMAX( d->imstart - first, 0 ) ), lineRect.top() ),
-			      QPoint( tix + ti.cursorToX( QMIN( d->imend - first, last - first + 1 ) )-1, lineRect.bottom() ) ).normalize();
-	    p->save();
+ 	    QRect highlight = QRect( QPoint( tix + ti.cursorToX( QMAX( d->imstart - first, 0 ) ), lineRect.top() ),
+ 			      QPoint( tix + ti.cursorToX( QMIN( d->imend - first, last - first + 1 ) )-1, lineRect.bottom() ) ).normalize();
+ 	    p->save();
 @@ -1969,11 +2034,16 @@
-	    imCol.setHsv( h1, s1, ( v1 + v2 ) / 2 );
-	    p->fillRect( highlight, imCol );
-	    p->drawTextItem( topLeft, ti, textflags );
+ 	    imCol.setHsv( h1, s1, ( v1 + v2 ) / 2 );
+ 	    p->fillRect( highlight, imCol );
+ 	    p->drawTextItem( topLeft, ti, textflags );
 +            // draw preedit's underline
 +            if (d->imend - d->imstart > 0) {
 +                p->setPen( cg.text() );
 +                p->drawLine( highlight.bottomLeft(), highlight.bottomRight() );
 +            }
-	    p->restore();
-	}
-
-	// input method selection
+ 	    p->restore();
+ 	}
+ 
+ 	// input method selection
 -	if ( d->imselstart < d->imselend && (last >= d->imselstart && first < d->imselend ) ) {
 +	if ( d->hasIMSelection() && (last >= d->imselstart && first < d->imselend ) ) {
-	    QRect highlight = QRect( QPoint( tix + ti.cursorToX( QMAX( d->imselstart - first, 0 ) ), lineRect.top() ),
-			      QPoint( tix + ti.cursorToX( QMIN( d->imselend - first, last - first + 1 ) )-1, lineRect.bottom() ) ).normalize();
-	    p->save();
+ 	    QRect highlight = QRect( QPoint( tix + ti.cursorToX( QMAX( d->imselstart - first, 0 ) ), lineRect.top() ),
+ 			      QPoint( tix + ti.cursorToX( QMIN( d->imselend - first, last - first + 1 ) )-1, lineRect.bottom() ) ).normalize();
+ 	    p->save();
 @@ -2001,7 +2071,11 @@
      }
-
+ 
      // draw cursor
 -    if ( d->cursorVisible && !supressCursor ) {
-+    //
++    // 
 +    // Asian users regard IM selection text as cursor on candidate
 +    // selection phase of input method, so ordinary cursor should be
 +    // invisible if IM selection text exists.
 +    if ( d->cursorVisible && !supressCursor && !d->hasIMSelection() ) {
-	QPoint from( topLeft.x() + cix, lineRect.top() );
-	QPoint to = from + QPoint( 0, lineRect.height() );
-	p->drawLine( from, to );
+ 	QPoint from( topLeft.x() + cix, lineRect.top() );
+ 	QPoint to = from + QPoint( 0, lineRect.height() );
+ 	p->drawLine( from, to );
 @@ -2116,6 +2190,10 @@
  void QLineEdit::contextMenuEvent( QContextMenuEvent * e )
  {
@@ -19564,29 +19531,29 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 @@ -2169,6 +2247,13 @@
      + ACCEL_KEY( A )
  #endif
-	);
+ 	);
 +
 +#ifndef QT_NO_IM
 +    QInputContext *qic = getInputContext();
 +    if ( qic )
 +	qic->addMenusTo( popup );
 +#endif
-+
++    
      popup->setItemEnabled( id - IdUndo, d->isUndoAvailable() );
      popup->setItemEnabled( id - IdRedo, d->isRedoAvailable() );
  #ifndef QT_NO_CLIPBOARD
 @@ -2302,7 +2387,7 @@
      textLayout.endLine(0, 0, Qt::AlignLeft|Qt::SingleLine, &ascent);
  }
-
+ 
 -int QLineEditPrivate::xToPos( int x, QTextItem::CursorPosition betweenOrOn ) const
 +int QLineEditPrivate::xToPosInternal( int x, QTextItem::CursorPosition betweenOrOn ) const
  {
      x-= q->contentsRect().x() - hscroll + innerMargin;
      for ( int i = 0; i < textLayout.numItems(); ++i ) {
 @@ -2311,7 +2396,13 @@
-	if ( x >= tir.left() && x <= tir.right() )
-	    return ti.xToCursor( x - tir.x(), betweenOrOn ) + ti.from();
+ 	if ( x >= tir.left() && x <= tir.right() )
+ 	    return ti.xToCursor( x - tir.x(), betweenOrOn ) + ti.from();
      }
 -    return x < 0 ? 0 : text.length();
 +    return x < 0 ? -1 : text.length();
@@ -19597,10 +19564,10 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +    int pos = xToPosInternal( x, betweenOrOn );
 +    return ( pos < 0 ) ? 0 : pos;
  }
-
-
+ 
+ 
 @@ -2332,9 +2423,19 @@
-
+ 
  void QLineEditPrivate::updateMicroFocusHint()
  {
 +    // To reduce redundant microfocus update notification, we remember
@@ -19620,14 +19587,25 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.cpp qt-x11-free-3.3.8/sr
 +	}
      }
  }
-
+ 
+diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qlineedit.h qt-x11-free-3.3.8/src/widgets/qlineedit.h
+--- qt-x11-free-3.3.8.orig/src/widgets/qlineedit.h	2007-03-20 22:11:18.000000000 +0900
++++ qt-x11-free-3.3.8/src/widgets/qlineedit.h	2007-03-20 23:18:42.000000000 +0900
+@@ -196,6 +196,7 @@
+     void dropEvent( QDropEvent * );
+ #endif
+     void contextMenuEvent( QContextMenuEvent * );
++    bool sendMouseEventToInputContext( QMouseEvent *e );
+     virtual QPopupMenu *createPopupMenu();
+     void windowActivationChange( bool );
+ #ifndef QT_NO_COMPAT
 diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/src/widgets/qtextedit.cpp
 --- qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp	2007-03-20 22:11:18.000000000 +0900
 +++ qt-x11-free-3.3.8/src/widgets/qtextedit.cpp	2007-03-20 23:18:42.000000000 +0900
 @@ -39,6 +39,11 @@
-
+ 
  #ifndef QT_NO_TEXTEDIT
-
+ 
 +// Keep this position to avoid patch rejection
 +#ifndef QT_NO_IM
 +#include "qinputcontext.h"
@@ -19646,19 +19624,19 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
      uint tabChangesFocus : 1;
      QString scrollToAnchor; // used to deferr scrollToAnchor() until the show event when we are resized
 @@ -1078,6 +1085,10 @@
-	    l += v;
-	}
+ 	    l += v;
+ 	}
      }
 +
 +    // This invocation is required to follow dragging of active window
 +    // by the showed candidate window.
 +    updateMicroFocusHint();
  }
-
+ 
  /*!
 @@ -1553,6 +1564,35 @@
  }
-
+ 
  /*!
 +  This function is not intended as polymorphic usage. Just a shared code
 +  fragment that calls QWidget::sendMouseEventToInputContext() easily for this
@@ -19695,10 +19673,10 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 @@ -1582,11 +1622,17 @@
      doc->removeSelection( QTextDocument::IMCompositionText );
      doc->removeSelection( QTextDocument::IMSelectionText );
-
+ 
 -    if ( d->preeditLength > 0 && cursor->paragraph() )
 +    if ( d->composeMode() && cursor->paragraph() )
-	cursor->paragraph()->remove( d->preeditStart, d->preeditLength );
+ 	cursor->paragraph()->remove( d->preeditStart, d->preeditLength );
      cursor->setIndex( d->preeditStart );
      d->preeditLength = e->text().length();
 -    insert( e->text() );
@@ -19713,16 +19691,16 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
      // be careful
      if(d->preeditStart != -1) {
 @@ -1598,13 +1644,20 @@
-
-	cursor->setIndex( d->preeditStart + e->cursorPos() );
-
+ 
+ 	cursor->setIndex( d->preeditStart + e->cursorPos() );
+ 
 -	int sellen = e->selectionLength();
-	if ( sellen > 0 ) {
-	    cursor->setIndex( d->preeditStart + e->cursorPos() + sellen );
-	    c = *cursor;
-	    cursor->setIndex( d->preeditStart + e->cursorPos() );
-	    doc->setSelectionStart( QTextDocument::IMSelectionText, *cursor );
-	    doc->setSelectionEnd( QTextDocument::IMSelectionText, c );
+ 	if ( sellen > 0 ) {
+ 	    cursor->setIndex( d->preeditStart + e->cursorPos() + sellen );
+ 	    c = *cursor;
+ 	    cursor->setIndex( d->preeditStart + e->cursorPos() );
+ 	    doc->setSelectionStart( QTextDocument::IMSelectionText, *cursor );
+ 	    doc->setSelectionEnd( QTextDocument::IMSelectionText, c );
 +#if 0
 +	    // Disabled for Asian input method that shows candidate
 +	    // window. This behavior is same as Qt/E 2.3.7 which supports
@@ -19731,16 +19709,16 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +	    // to the selection text.
 +	    cursor->setIndex( d->preeditStart + d->preeditLength );
 +#endif
-	    cursor->setIndex( d->preeditStart + d->preeditLength );
-	}
+ 	    cursor->setIndex( d->preeditStart + d->preeditLength );
+ 	}
      }
 @@ -1629,11 +1682,12 @@
      if (undoRedoInfo.type == UndoRedoInfo::IME)
          undoRedoInfo.type = UndoRedoInfo::Invalid;
-
+ 
 -    if ( d->preeditLength > 0 && cursor->paragraph() )
 +    if ( d->composeMode() && cursor->paragraph() )
-	cursor->paragraph()->remove( d->preeditStart, d->preeditLength );
+ 	cursor->paragraph()->remove( d->preeditStart, d->preeditLength );
      if ( d->preeditStart >= 0 ) {
          cursor->setIndex( d->preeditStart );
 -        insert( e->text() );
@@ -19748,11 +19726,11 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +	insert( e->text(), FALSE );
      }
      d->preeditStart = d->preeditLength = -1;
-
+ 
 @@ -2124,6 +2178,13 @@
-	 isReadOnly() )
-	return;
-
+ 	 isReadOnly() )
+ 	return;
+ 
 +    // Asian users regard selection text as cursor on candidate
 +    // selection phase of input method, so ordinary cursor should be
 +    // invisible if IM selection text exists.
@@ -19766,15 +19744,15 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 @@ -2198,6 +2259,9 @@
      }
  #endif
-
+ 
 +    if ( sendMouseEventToInputContext( e ) )
 +	return;
 +
      if ( d->trippleClickTimer->isActive() &&
-	 ( e->globalPos() - d->trippleClickPoint ).manhattanLength() <
-	 QApplication::startDragDistance() ) {
+ 	 ( e->globalPos() - d->trippleClickPoint ).manhattanLength() <
+ 	 QApplication::startDragDistance() ) {
 @@ -2303,7 +2367,9 @@
-	return;
+ 	return;
      }
  #endif
 -    if ( mousePressed ) {
@@ -19782,34 +19760,34 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +	// don't return from here to avoid cursor vanishing
 +    } else if ( mousePressed ) {
  #ifndef QT_NO_DRAGANDDROP
-	if ( mightStartDrag ) {
-	    dragStartTimer->stop();
+ 	if ( mightStartDrag ) {
+ 	    dragStartTimer->stop();
 @@ -2360,7 +2426,7 @@
-
+ 
  void QTextEdit::contentsMouseReleaseEvent( QMouseEvent * e )
  {
 -    if ( !inDoubleClick ) { // could be the release of a dblclick
 +    if ( !inDoubleClick && !d->composeMode() ) { // could be the release of a dblclick
-	int para = 0;
-	int index = charAt( e->pos(), &para );
-	emit clicked( para, index );
+ 	int para = 0;
+ 	int index = charAt( e->pos(), &para );
+ 	emit clicked( para, index );
 @@ -2371,6 +2437,8 @@
-	return;
+ 	return;
      }
  #endif
 +    if ( sendMouseEventToInputContext( e ) )
 +	return;
      QTextCursor oldCursor = *cursor;
      if ( scrollTimer->isActive() )
-	scrollTimer->stop();
+ 	scrollTimer->stop();
 @@ -2464,7 +2532,7 @@
-
+ 
  void QTextEdit::contentsMouseDoubleClickEvent( QMouseEvent * e )
  {
 -    if ( e->button() != Qt::LeftButton ) {
 +    if ( e->button() != Qt::LeftButton && !d->composeMode() ) {
-	e->ignore();
-	return;
+ 	e->ignore();
+ 	return;
      }
 @@ -2495,6 +2563,9 @@
      } else
@@ -19818,8 +19796,8 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +	if ( sendMouseEventToInputContext( e ) )
 +	    return;
 +
-	QTextCursor c1 = *cursor;
-	QTextCursor c2 = *cursor;
+ 	QTextCursor c1 = *cursor;
+ 	QTextCursor c2 = *cursor;
  #if defined(Q_OS_MAC)
 @@ -2670,10 +2741,15 @@
  */
@@ -19833,7 +19811,7 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +
      clearUndoRedo();
      mousePressed = FALSE;
-
+ 
 -    e->accept();
  #ifndef QT_NO_POPUPMENU
      QGuardedPtr<QTextEdit> that = this;
@@ -19856,12 +19834,12 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +    // selection phase of input method, so ordinary cursor should be
 +    // invisible if IM selection text exists.
 +    drawCursor( !imSelection );
-
+ 
      if ( undoEnabled && !isReadOnly() && undoRedoInfo.type != UndoRedoInfo::IME ) {
-	undoRedoInfo.d->text += txt;
+ 	undoRedoInfo.d->text += txt;
 @@ -3056,7 +3137,13 @@
-	doc->setSelectionEnd( QTextDocument::Standard, *cursor );
-	repaintChanged();
+ 	doc->setSelectionEnd( QTextDocument::Standard, *cursor );
+ 	repaintChanged();
      }
 -    updateMicroFocusHint();
 +    // updateMicroFocusHint() should not be invoked here when this
@@ -19884,10 +19862,32 @@ diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.cpp qt-x11-free-3.3.8/sr
 +    if ( qic )
 +	qic->addMenusTo( popup );
 +#endif
-+
++    
      popup->setItemEnabled( d->id[ IdUndo ], !isReadOnly() && doc->commands()->isUndoAvailable() );
      popup->setItemEnabled( d->id[ IdRedo ], !isReadOnly() && doc->commands()->isRedoAvailable() );
  #ifndef QT_NO_CLIPBOARD
+diff -duNr qt-x11-free-3.3.8.orig/src/widgets/qtextedit.h qt-x11-free-3.3.8/src/widgets/qtextedit.h
+--- qt-x11-free-3.3.8.orig/src/widgets/qtextedit.h	2007-03-20 22:11:18.000000000 +0900
++++ qt-x11-free-3.3.8/src/widgets/qtextedit.h	2007-03-20 23:18:42.000000000 +0900
+@@ -211,7 +211,9 @@
+     enum TextInsertionFlags {
+ 	RedoIndentation = 0x0001,
+ 	CheckNewLines = 0x0002,
+-	RemoveSelected = 0x0004
++	RemoveSelected = 0x0004,
++	AsIMCompositionText = 0x0008,  // internal use
++	WithIMSelection = 0x0010       // internal use
+     };
+ 
+     QTextEdit( const QString& text, const QString& context = QString::null,
+@@ -439,6 +441,7 @@
+     void contentsDropEvent( QDropEvent *e );
+ #endif
+     void contentsContextMenuEvent( QContextMenuEvent *e );
++    bool sendMouseEventToInputContext( QMouseEvent *e );
+     bool focusNextPrevChild( bool next );
+     QTextDocument *document() const;
+     QTextCursor *textCursor() const;
 diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindowbase.ui qt-x11-free-3.3.8/tools/qtconfig/mainwindowbase.ui
 --- qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindowbase.ui	2007-03-20 22:11:18.000000000 +0900
 +++ qt-x11-free-3.3.8/tools/qtconfig/mainwindowbase.ui	2007-03-20 23:18:43.000000000 +0900
@@ -19945,9 +19945,9 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.cpp qt-x11-free-3.3.
  #include <qfontdatabase.h>
  #include <qlineedit.h>
 @@ -361,13 +362,73 @@
-
+ 
      rtlExtensions->setChecked( settings.readBoolEntry( "/qt/useRtlExtensions", FALSE ) );
-
+ 
 -#ifdef Q_WS_X11
 +#if defined(Q_WS_X11)
      inputStyle->setCurrentText( settings.readEntry( "/qt/XIMInputStyle", trUtf8( "On The Spot" ) ) );
@@ -19955,7 +19955,7 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.cpp qt-x11-free-3.3.
      inputStyle->hide();
      inputStyleLabel->hide();
  #endif
-
+ 
 +#if defined(Q_WS_X11) && !defined(QT_NO_IM_EXTENSIONS)
 +    /*
 +        This code makes it possible to set up default input method.
@@ -19993,7 +19993,7 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.cpp qt-x11-free-3.3.
 +
 +    /*
 +        input method set up as a default in the past is chosen.
-+	If nothing is set up, default input method in the platform is chosen.
++	If nothing is set up, default input method in the platform is chosen. 
 +     */
 +    // default input method is XIM in X11.
 +    QString currentIM = settings.readEntry("/qt/DefaultInputMethod", "xim");
@@ -20020,8 +20020,8 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.cpp qt-x11-free-3.3.
      fontpaths = settings.readListEntry("/qt/fontPath", ':');
      fontpathlistbox->insertStringList(fontpaths);
 @@ -444,6 +505,13 @@
-	else if ( style == trUtf8( "Root" ) )
-	    str = "Root";
+ 	else if ( style == trUtf8( "Root" ) )
+ 	    str = "Root";
          settings.writeEntry( "/qt/XIMInputStyle", inputStyle->currentText() );
 +
 +#if !defined(QT_NO_IM_EXTENSIONS)
@@ -20031,8 +20031,8 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.cpp qt-x11-free-3.3.
 +	settings.writeEntry("/qt/DefaultInputMethod", inputMethodIdentifiers[imIndex]);
 +#endif
  #endif
-
-	QStringList effects;
+ 
+ 	QStringList effects;
 diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.h qt-x11-free-3.3.8/tools/qtconfig/mainwindow.h
 --- qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.h	2007-03-20 22:11:18.000000000 +0900
 +++ qt-x11-free-3.3.8/tools/qtconfig/mainwindow.h	2007-03-20 23:18:43.000000000 +0900
@@ -20043,26 +20043,4 @@ diff -duNr qt-x11-free-3.3.8.orig/tools/qtconfig/mainwindow.h qt-x11-free-3.3.8/
 +    QStringList inputMethodIdentifiers;
      bool modified;
  };
-
-diff -duNr qt-x11-free-3.3.8.orig/src/tools/qmap.h qt-x11-free-3.3.8/src/tools/qmap.h
---- qt-x11-free-3.3.8.orig/src/tools/qmap.h	2008-01-15 11:09:13.000000000 -0800
-+++ qt-x11-free-3.3.8/src/tools/qmap.h	2012-11-04 14:27:23.709091991 -0800
-@@ -55,6 +55,7 @@
- #endif
-
- //#define QT_CHECK_MAP_RANGE
-+#include <stddef.h>
-
- struct Q_EXPORT QMapNodeBase
- {
-diff -duNr qt-x11-free-3.3.8.orig/src/tools/qvaluelist.h qt-x11-free-3.3.8/src/tools/qvaluelist.h
---- qt-x11-free-3.3.8.orig/src/tools/qvaluelist.h	2008-01-15 11:09:13.000000000 -0800
-+++ qt-x11-free-3.3.8/src/tools/qvaluelist.h	2012-11-04 14:28:17.296268359 -0800
-@@ -53,6 +53,7 @@
- #endif
-
- //#define QT_CHECK_VALUELIST_RANGE
-+#include <stddef.h>
-
- #if defined(Q_CC_MSVC)
- #pragma warning(disable:4284) // "return type for operator -> is not a UDT"
+ 
