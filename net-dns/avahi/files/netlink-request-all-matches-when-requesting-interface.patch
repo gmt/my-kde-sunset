@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From: Pablo Neira Ayuso <pablo@netfilter.org>
 Date: Fri, 18 Feb 2011 17:58:21 +0000 (+0100)
 Subject: netlink: fix wrong use of netlink flags for dump operations
