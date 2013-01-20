@@ -1,35 +1,22 @@
---- superkaramba/src/admin/acinclude.m4.in
-+++ admin/acinclude.m4.in
-@@ -4649,18 +4649,20 @@
-
+diff -urpN superkaramba-3.5.10.orig/admin/acinclude.m4.in superkaramba-3.5.10/admin/acinclude.m4.in
+--- superkaramba-3.5.10.orig/admin/acinclude.m4.in	2013-01-19 17:12:31.035641918 -0800
++++ superkaramba-3.5.10/admin/acinclude.m4.in	2013-01-19 17:13:59.279146092 -0800
+@@ -4649,12 +4649,12 @@ fi
+ 
  AC_DEFUN([KDE_CHECK_PYTHON],
  [
 -  KDE_CHECK_PYTHON_INTERN("2.5",
 -    [KDE_CHECK_PYTHON_INTERN("2.4",
--     [KDE_CHECK_PYTHON_INTERN("2.3",
--       [KDE_CHECK_PYTHON_INTERN("2.2",
--         [KDE_CHECK_PYTHON_INTERN("2.1",
--           [KDE_CHECK_PYTHON_INTERN("2.0",
--             [KDE_CHECK_PYTHON_INTERN($1, $2) ])
--           ])
--         ])
--       ])
--     ])
--  ])
+-     [KDE_CHECK_PYTHON_INTERN("2.3", 
+-       [KDE_CHECK_PYTHON_INTERN("2.2", 
+-         [KDE_CHECK_PYTHON_INTERN("2.1", 
+-           [KDE_CHECK_PYTHON_INTERN("2.0", 
 +  KDE_CHECK_PYTHON_INTERN("2.7",
 +    [KDE_CHECK_PYTHON_INTERN("2.6",
-+      [KDE_CHECK_PYTHON_INTERN("2.5",
-+        [KDE_CHECK_PYTHON_INTERN("2.4",
-+          [KDE_CHECK_PYTHON_INTERN("2.3",
-+            [KDE_CHECK_PYTHON_INTERN("2.2",
-+              [KDE_CHECK_PYTHON_INTERN("2.1",
-+                [KDE_CHECK_PYTHON_INTERN($1, $2)])
-+              ])
-+            ])
-+          ])
-+        ])
-+      ])
-+    ])
- ])
-
- AC_DEFUN([KDE_CHECK_STL],
++     [KDE_CHECK_PYTHON_INTERN("2.5", 
++       [KDE_CHECK_PYTHON_INTERN("2.4", 
++         [KDE_CHECK_PYTHON_INTERN("2.3", 
++           [KDE_CHECK_PYTHON_INTERN("2.2", 
+              [KDE_CHECK_PYTHON_INTERN($1, $2) ])
+            ])
+          ])
