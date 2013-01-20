@@ -21,7 +21,7 @@ SITEFILE=50${PN}-gentoo.el
 
 src_unpack() {
 	kde-meta_src_unpack
-	epatch "${FILESDIR}"/${P}-gcc47.patch
+	epatch "${FILESDIR}"/kviewshell-3.5.10-gcc47.patch
 }
 
 src_compile() {
