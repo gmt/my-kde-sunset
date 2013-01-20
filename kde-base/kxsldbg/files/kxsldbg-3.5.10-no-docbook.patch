@@ -1,0 +1,60 @@
+diff -urpN kxsldbg-3.5.10.orig/kxsldbg/kxsldbgpart/libxsldbg/xsldbg.cpp kxsldbg-3.5.10/kxsldbg/kxsldbgpart/libxsldbg/xsldbg.cpp
+--- kxsldbg-3.5.10.orig/kxsldbg/kxsldbgpart/libxsldbg/xsldbg.cpp	2008-08-19 11:15:14.000000000 -0700
++++ kxsldbg-3.5.10/kxsldbg/kxsldbgpart/libxsldbg/xsldbg.cpp	2013-01-19 18:15:54.550467169 -0800
+@@ -82,9 +82,11 @@
+ #include <libxml/xmlerror.h>
+ #include <libxml/HTMLtree.h>
+ #include <libxml/xmlIO.h>
++#if 0
+ #ifdef LIBXML_DOCB_ENABLED
+ #include <libxml/DOCBparser.h>
+ #endif
++#endif
+ #ifdef LIBXML_XINCLUDE_ENABLED
+ #include <libxml/xinclude.h>
+ #endif
+@@ -973,6 +975,7 @@ xsldbgLoadXmlData(void)
+                             NULL);
+     else
+ #endif
++#if 0
+ #ifdef LIBXML_DOCB_ENABLED
+     if (optionsGetIntOption(OPTIONS_DOCBOOK))
+         doc = docbParseFile((char *)
+@@ -980,6 +983,7 @@ xsldbgLoadXmlData(void)
+                             NULL);
+     else
+ #endif
++#endif
+ 
+ #if LIBXML_VERSION >= 20600
+         doc = xmlSAXParseFile(&mySAXHandler,
+@@ -1025,11 +1029,13 @@ xsldbgLoadXmlTemporary(const xmlChar * p
+         doc = htmlParseFile((char *) path, NULL);
+     else
+ #endif
++#if 0
+ #ifdef LIBXML_DOCB_ENABLED
+     if (optionsGetIntOption(OPTIONS_DOCBOOK))
+         doc = docbParseFile((char *) path, NULL);
+     else
+ #endif
++#endif
+         doc = xmlSAXParseFile(&mySAXhdlr, (char *) path, 0);
+     if (doc == NULL) {
+         xsldbgGenericErrorFunc(i18n("Error: Unable to parse file %1.\n").arg(xsldbgUrl(path)));
+diff -urpN kxsldbg-3.5.10.orig/kxsldbg/xsldbgmain.cpp kxsldbg-3.5.10/kxsldbg/xsldbgmain.cpp
+--- kxsldbg-3.5.10.orig/kxsldbg/xsldbgmain.cpp	2013-01-19 18:13:30.766034191 -0800
++++ kxsldbg-3.5.10/kxsldbg/xsldbgmain.cpp	2013-01-19 18:14:07.161145790 -0800
+@@ -73,9 +73,11 @@ static const KCmdLineOptions options[] =
+     { "html", 		I18N_NOOP("The input document is(are) an HTML file(s)"), 0},
+ #endif
+ 
++#if 0
+ #ifdef LIBXML_DOCB_ENABLED
+     { "docbook", 	I18N_NOOP("The input document is SGML docbook"), 0},
+ #endif
++#endif
+ 
+     { "nonet", 		I18N_NOOP("Disable the fetching DTDs or entities over network"), 0},
+ 

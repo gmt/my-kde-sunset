@@ -11,3 +11,5 @@ IUSE="kdehiddenvisibility"
 
 DEPEND="dev-libs/libxslt
 	dev-libs/libxml2"
+
+PATCHES="${FILESDIR}/${P}-no-docbook.patch"
