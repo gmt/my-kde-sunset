@@ -1,6 +1,6 @@
-diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/documentWidget.cpp kviewshell-3.5.10/kviewshell/documentWidget.cpp
+diff -urpN kviewshell-3.5.10.orig/kviewshell/documentWidget.cpp kviewshell-3.5.10/kviewshell/documentWidget.cpp
 --- kviewshell-3.5.10.orig/kviewshell/documentWidget.cpp	2005-11-08 14:25:45.000000000 -0800
-+++ kviewshell-3.5.10/kviewshell/documentWidget.cpp	2012-12-09 06:55:47.598962271 -0800
++++ kviewshell-3.5.10/kviewshell/documentWidget.cpp	2013-01-19 18:29:52.766480843 -0800
 @@ -287,7 +287,8 @@ void DocumentWidget::paintEvent(QPaintEv
      if (KVSPrefs::changeColors() && KVSPrefs::renderMode() != KVSPrefs::EnumRenderMode::Paper)
      {
@@ -11,24 +11,24 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/documentWi
      }
      else
      {
-diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GContainer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h
+diff -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GContainer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h
 --- kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GContainer.h	2005-09-10 01:19:20.000000000 -0700
-+++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h	2012-12-09 07:50:31.569679411 -0800
++++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GContainer.h	2013-01-19 18:34:17.447151789 -0800
 @@ -66,6 +66,7 @@
-
+ 
  #include "GException.h"
  #include "GSmartPointer.h"
 +#include "GPixmap.h"
  #include <string.h>
-
+ 
  #ifdef HAVE_NAMESPACES
 @@ -887,21 +888,21 @@ public:
-   /** Inserts an element after the last element of the list.
+   /** Inserts an element after the last element of the list. 
        The new element is initialized with a copy of argument #elt#. */
    void append(const TYPE &elt)
 -    { GListImpl<TI>::append(newnode((const TI&)elt)); }
 +    { GListImpl<TI>::append(this->newnode((const TI&)elt)); }
-   /** Inserts an element before the first element of the list.
+   /** Inserts an element before the first element of the list. 
        The new element is initialized with a copy of argument #elt#. */
    void prepend(const TYPE &elt)
 -    { GListImpl<TI>::prepend(newnode((const TI&)elt)); }
@@ -51,7 +51,7 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 @@ -1025,6 +1026,94 @@ public:
    void empty();
  };
-
+ 
 +// ------------------------------------------------------------
 +// HASH FUNCTIONS
 +// ------------------------------------------------------------
@@ -146,7 +146,7 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 @@ -1057,7 +1146,7 @@ GSetImpl<K>::GSetImpl(const Traits &trai
  template<class K> GCONT HNode *
  GSetImpl<K>::get(const K &key) const
- {
+ { 
 -  unsigned int hashcode = hash(key);
 +  unsigned int hashcode = (const unsigned int &)hash(key);
    for (SNode *s=(SNode*)hashnode(hashcode); s; s=(SNode*)(s->hprev))
@@ -169,7 +169,7 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 +  this->installnode(n);
    return n;
  }
-
+ 
 @@ -1197,13 +1286,13 @@ public:
        contains key #key#. This variant of #operator[]# is necessary when
        dealing with a #const GMAP<KTYPE,VTYPE>#. */
@@ -183,13 +183,13 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
    VTYPE& operator[](const KTYPE &key)
 -    { return (VTYPE&)(((typename GMapImpl<KTYPE,TI>::MNode*)(get_or_create(key)))->val); }
 +    { return (VTYPE&)(((typename GMapImpl<KTYPE,TI>::MNode*)(this->get_or_create(key)))->val); }
-   /** Destroys the map entry for position #pos#.
+   /** Destroys the map entry for position #pos#.  
        Nothing is done if position #pos# is not a valid position. */
    void del(GPosition &pos)
-@@ -1266,93 +1355,6 @@ public:
+@@ -1266,95 +1355,6 @@ public:
  };
-
-
+ 
+ 
 -// ------------------------------------------------------------
 -// HASH FUNCTIONS
 -// ------------------------------------------------------------
@@ -204,52 +204,52 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 -//@{
 -
 -/** Hashing function (unsigned int). */
--static inline unsigned int
--hash(const unsigned int & x)
--{
--  return x;
+-static inline unsigned int 
+-hash(const unsigned int & x) 
+-{ 
+-  return x; 
 -}
 -
 -/** Hashing function (int). */
--static inline unsigned int
--hash(const int & x)
--{
+-static inline unsigned int 
+-hash(const int & x) 
+-{ 
 -  return (unsigned int)x;
 -}
 -
 -/** Hashing function (long). */
 -static inline unsigned int
--hash(const long & x)
--{
+-hash(const long & x) 
+-{ 
 -  return (unsigned int)x;
 -}
 -
 -/** Hashing function (unsigned long). */
 -static inline unsigned int
--hash(const unsigned long & x)
--{
+-hash(const unsigned long & x) 
+-{ 
 -  return (unsigned int)x;
 -}
 -
 -/** Hashing function (void *). */
--static inline unsigned int
--hash(void * const & x)
--{
--  return (unsigned long) x;
+-static inline unsigned int 
+-hash(void * const & x) 
+-{ 
+-  return (unsigned long) x; 
 -}
 -
 -/** Hashing function (const void *). */
--static inline unsigned int
--hash(const void * const & x)
--{
--  return (unsigned long) x;
+-static inline unsigned int 
+-hash(const void * const & x) 
+-{ 
+-  return (unsigned long) x; 
 -}
 -
 -/** Hashing function (float). */
 -static inline unsigned int
--hash(const float & x)
--{
--  // optimizer will get rid of unnecessary code
+-hash(const float & x) 
+-{ 
+-  // optimizer will get rid of unnecessary code  
 -  unsigned int *addr = (unsigned int*)&x;
 -  if (sizeof(float)<2*sizeof(unsigned int))
 -    return addr[0];
@@ -259,8 +259,8 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 -
 -/** Hashing function (double). */
 -static inline unsigned int
--hash(const double & x)
--{
+-hash(const double & x) 
+-{ 
 -  // optimizer will get rid of unnecessary code
 -  unsigned int *addr = (unsigned int*)&x;
 -  if (sizeof(double)<2*sizeof(unsigned int))
@@ -268,7 +268,7 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 -  else if (sizeof(double)<4*sizeof(unsigned int))
 -    return addr[0]^addr[1];
 -  else
--    return addr[0]^addr[1]^addr[2]^addr[3];
+-    return addr[0]^addr[1]^addr[2]^addr[3];    
 -}
 -
 -
@@ -277,17 +277,19 @@ diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/dj
 -//@}
 -
 -// ------------ THE END
-
-
+-
+-
  #ifdef HAVE_NAMESPACES
-diff -x '*.loT' -x config.log -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h
+ }
+ # ifndef NOT_USING_DJVU_NAMESPACE
+diff -urpN kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h
 --- kviewshell-3.5.10.orig/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h	2005-09-10 01:19:20.000000000 -0700
-+++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h	2012-12-09 06:59:23.115740992 -0800
++++ kviewshell-3.5.10/kviewshell/plugins/djvu/libdjvu/GSmartPointer.h	2013-01-19 18:29:52.769480779 -0800
 @@ -106,6 +106,7 @@ namespace DJVU {
  #endif
  #endif
-
+ 
 +#include <string.h>
-
-
- /* What is this innovation ?
+ 
+ 
+ /* What is this innovation ? 
