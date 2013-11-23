@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/x11-themes/gtk-engines-qt/gtk-engines-qt-0.8-r4.ebuild,v 1.7 2009/06/13 23:04:56 scarabeus Exp $
 
-EAPI=1
+EAPI=3
 
 ARTS_REQUIRED="never"
 
@@ -40,12 +40,12 @@ PATCHES=(
 	"${FILESDIR}/gtk-engines-qt-0.8-optional-bonobo.patch"
 )
 
-src_compile() {
+src_configure() {
 	# enable or disable bonobo support based on gnome useflag (bug #206568)
 	mycmakeargs="${mycmakeargs}
 		$(cmake-utils_use_enable gnome BONOBO)"
 	CMAKE_IN_SOURCE_BUILD=1
-	cmake-utils_src_compile
+	cmake-utils_src_configure
 }
 
 src_install() {
