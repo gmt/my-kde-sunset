@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/app-misc/releaseforge/releaseforge-1.3.ebuild,v 1.2 2009/01/04 22:36:02 patrick Exp $
 
-EAPI=2
+EAPI=3
 
 inherit distutils
 
