@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-python/pykde/pykde-3.16.2.ebuild,v 1.3 2008/12/15 04:14:11 neurogeek Exp $
 
+EAPI=3
+
 inherit kde eutils distutils
 
 MY_P="PyKDE-${PV/*_pre/snapshot}"

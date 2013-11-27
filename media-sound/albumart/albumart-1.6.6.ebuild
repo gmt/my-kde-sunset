@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/media-sound/albumart/albumart-1.6.6.ebuild,v 1.4 2009/06/06 17:08:40 ssuominen Exp $
 
+EAPI=3
+
 inherit distutils eutils qt3
 
 DESCRIPTION="Album Cover Art Downloader"
