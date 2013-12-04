@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-p2p/qtorrent/qtorrent-0.9.6.1-r2.ebuild,v 1.4 2007/04/12 23:01:27 opfer Exp $
 
+EAPI=3
+
 inherit eutils distutils
 
 DESCRIPTION="QTorrent is a PyQt GUI for BitTorrent."
