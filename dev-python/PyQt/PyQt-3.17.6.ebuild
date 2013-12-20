@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-python/PyQt/PyQt-3.17.6.ebuild,v 1.8 2009/06/13 21:38:22 hwoarang Exp $
 
-EAPI="1"
+EAPI="2"
 inherit distutils
 
 MY_P="PyQt-x11-gpl-${PV/*_pre/snapshot-}"
@@ -28,7 +28,7 @@ src_unpack() {
 	sed -i -e "s:  check_license():# check_license():" "${S}"/configure.py
 }
 
-src_compile() {
+src_configure() {
 	python_get_version
 	addpredict ${QTDIR}/etc/settings
 
@@ -41,7 +41,6 @@ src_compile() {
 	use debug && myconf="${myconf} -u"
 
 	python configure.py ${myconf}
-	emake || die "emake failed"
 }
 
 src_install() {

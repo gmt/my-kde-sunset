@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-python/PyQt/PyQt-3.18.1.ebuild,v 1.8 2009/10/18 14:41:15 armin76 Exp $
 
-EAPI="2"
+EAPI="3"
 inherit distutils
 
 MY_P="PyQt-x11-gpl-${PV/*_pre/snapshot-}"
